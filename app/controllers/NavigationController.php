@@ -10,9 +10,10 @@ class NavigationController extends \BaseController {
 	public function index()
 	{
 		$nav = Navigation::where('language', Input::get('language', 'en'))
+					->orderBy('order_id')
 					->get();
 
-		return static::response('navigation', $nav->toArray());
+		return static::response('navigation', $nav->toArray('id', array('id', 'type')));
 	}
 
 

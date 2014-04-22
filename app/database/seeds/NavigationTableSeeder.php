@@ -12,41 +12,46 @@ class NavigationTableSeeder extends Seeder {
 	{
 		DB::table('navigation')->delete();
 
+		$i = 0;
+
 		foreach ($this->languages as $lang)
 		{
 			$page = Page::where('language', $lang)->first();
-
-			if ($page === NULL)
-			{
-				continue;
-			}
 
 			Navigation::create(array(
 				'title' => 'Home (' . $lang . ')',
 				'type' => 'uri',
 				'uri' => '',
 				'language' => $lang,
+				'order_id' => ++$i
 			));
 
-			Navigation::create(array(
-				'title' => $page->title . ' (' . $lang . ')',
-				'type' => 'page',
-				'page_id' => $page->id,
-				'language' => $lang,
-			));
+			if ($page)
+			{
+				Navigation::create(array(
+					'title' => $page->title . ' (' . $lang . ')',
+					'type' => 'page',
+					'page_id' => $page->id,
+					'language' => $lang,
+					'order_id' => ++$i
+				));
+			}
 
 			Navigation::create(array(
 				'title' => 'Google (' . $lang . ')',
 				'type' => 'website',
+				'target' => '_blank',
 				'url' => 'http://www.google.com/',
 				'language' => $lang,
+				'order_id' => ++$i
 			));
 
 			Navigation::create(array(
 				'title' => '404 (' . $lang . ')',
 				'type' => 'uri',
-				'url' => '/404',
+				'uri' => '/404',
 				'language' => $lang,
+				'order_id' => ++$i
 			));
 		}
 

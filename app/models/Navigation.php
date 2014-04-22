@@ -3,7 +3,13 @@
 class Navigation extends Eloquent {
 
 	protected $table = 'navigation';
-	protected $hidden = array('creted_at', 'updated_at');
+	protected $hidden = array('page_id', 'url', 'uri', 'created_at', 'updated_at', 'page');
+	protected $appends = array('full_url');
+
+	public function page()
+	{
+		return $this->hasOne('Page', 'id', 'page_id');
+	}
 
 	public function getIdAttribute($value)
 	{
@@ -18,6 +24,24 @@ class Navigation extends Eloquent {
 	public function getOrderIdAttribute($value)
 	{
 		return (int) $value;
+	}
+
+	public function getFullUrlAttribute()
+	{
+		switch ($this->attributes['type'])
+		{
+			case 'uri':
+				return $this->attributes['uri'];
+
+			case 'website':
+				return $this->attributes['url'];
+
+			case 'page':
+				return '/' . $this->page->slug;
+
+			default:
+				throw new Exception("Error Processing Request");
+		}
 	}
 
 }
