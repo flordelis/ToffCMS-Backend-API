@@ -55,6 +55,7 @@ class PageController extends \BaseController {
 	public function show($slug)
 	{
 		$page = Page::where('slug', $slug)
+					->where('language', Input::get('language', 'en'))
 					->with('author')
 					->take(1)
 					->get();
