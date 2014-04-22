@@ -23,4 +23,5 @@ Route::group(array('prefix' => 'v1.0'), function()
 	Route::resource('page', 'PageController');
 	Route::resource('gallery', 'GalleryController');
 	Route::resource('i18n', 'I18nController');
+	Route::resource('navigation', 'NavigationController');
 });
