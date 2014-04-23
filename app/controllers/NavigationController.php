@@ -13,7 +13,7 @@ class NavigationController extends \BaseController {
 					->orderBy('order_id')
 					->get();
 
-		return static::response('navigation', $nav->toArray('id', array('id', 'type')));
+		return static::response('navigation', $nav->toArray());
 	}
 
 
