@@ -18,7 +18,7 @@ class NavigationTableSeeder extends Seeder {
 		{
 			$page = Page::where('language', $lang)->first();
 
-			Navigation::create(array(
+			$parent = Navigation::create(array(
 				'title' => 'Home (' . $lang . ')',
 				'type' => 'uri',
 				'uri' => '',
@@ -53,6 +53,18 @@ class NavigationTableSeeder extends Seeder {
 				'language' => $lang,
 				'order_id' => ++$i
 			));
+
+			for ($j = 1; $j <= rand(2, 6); $j++)
+			{
+				Navigation::create(array(
+					'title' => 'Item #' . $j,
+					'type' => 'uri',
+					'uri' => '',
+					'language' => $lang,
+					'order_id' => ++$i,
+					'parent_id' => $parent->id,
+				));
+			}
 		}
 
 

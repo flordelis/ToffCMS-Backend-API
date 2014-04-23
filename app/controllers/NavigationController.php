@@ -10,6 +10,8 @@ class NavigationController extends \BaseController {
 	public function index()
 	{
 		$nav = Navigation::where('language', Input::get('language', 'en'))
+					->where('parent_id', 0)
+					->with('children')
 					->orderBy('order_id')
 					->get();
 
