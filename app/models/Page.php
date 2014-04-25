@@ -7,7 +7,8 @@ class Page extends Eloquent {
 
 	public function author()
 	{
-		return $this->hasOne('User', 'id', 'author_id');
+		return $this->hasOne('User', 'id', 'author_id')
+					->select('id', 'email');
 	}
 
 	public function getAuthorIdAttribute($value)

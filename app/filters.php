@@ -44,6 +44,14 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('auth.apiKey', function ()
+{
+	if (User::validAPIKey(Input::get('api_key'), Input::get('user_id')) === FALSE)
+	{
+		return App::abort(404);
+	}
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

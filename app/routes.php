@@ -17,12 +17,22 @@ Route::get('/', function()
 });
 
 // Route group for API versioning
-// 'before' => 'auth.basic'
 Route::group(array('prefix' => 'v1.0'), function()
 {
-	Route::resource('page', 'PageController');
-	Route::resource('gallery', 'GalleryController');
-	Route::resource('i18n', 'I18nController');
-	Route::resource('navigation', 'NavigationController');
-	Route::resource('settings', 'SettingController');
+	// Admin routes
+	Route::group(array('before' => 'auth.apiKey'), function()
+	{
+		// Place admin routes here
+		Route::resource('page', 'PageController');
+		Route::resource('gallery', 'GalleryController');
+		Route::resource('navigation', 'NavigationController');
+		Route::resource('settings', 'SettingsController');
+	});
+
+	Route::get('page/{slug}', 'PageController@show');
+	Route::get('gallery', 'GalleryController@index');
+	Route::get('gallery/{slug}', 'GalleryController@show');
+	Route::get('navigation', 'NavigationController@index');
+	Route::get('settings', 'SettingController@index');
+	Route::post('login', 'LoginController@getApiKey');
 });

@@ -17,4 +17,5 @@ AddHandler application/x-httpd-php53 .php
 
 <IfModule mod_headers.c>
 Header always append Access-Control-Allow-Origin: "new.historymakers.lv"
+Header always append Access-Control-Allow-Origin: "admin.historymakers.lv"
 </IfModule>

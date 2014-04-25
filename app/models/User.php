@@ -17,7 +17,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password', 'api_key', 'updated_at');
+	protected $hidden = array('password', 'updated_at');
 
 	/**
 	 * Get the unique identifier for the user.
@@ -83,6 +83,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getIdAttribute($value)
 	{
 		return (int) $value;
+	}
+
+	/**
+	 * Validate the API key
+	 * @param  string $api_key
+	 * @param  integer $user_id
+	 * @return boolean
+	 */
+	public static function validAPIKey($api_key, $user_id) {
+		return self::where('id', $user_id)
+					->where('api_key', $api_key)
+					->get()
+					->count() === 1;
 	}
 
 }

@@ -9,13 +9,13 @@ class UserTableSeeder extends Seeder {
 		User::create(array(
 			'email' => 'mja@mja.lv',
 			'password' => Hash::make('password'),
-			'api_key' => Hash::make('key#1')
+			'api_key' => sha1('key#1')
 		));
 
 		User::create(array(
 			'email' => 'seconduser@example.org',
 			'password' => Hash::make('second_password'),
-			'api_key' => Hash::make('key#2')
+			'api_key' => sha1('key#2')
 		));
 	}
 
