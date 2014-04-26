@@ -5,6 +5,8 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
+	protected static $user;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -89,13 +91,32 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * Validate the API key
 	 * @param  string $api_key
 	 * @param  integer $user_id
-	 * @return boolean
+	 * @return boolean|object
 	 */
-	public static function validAPIKey($api_key, $user_id) {
-		return self::where('id', $user_id)
+	public static function validAPIKey($api_key, $user_id)
+	{
+		$user = self::where('id', $user_id)
 					->where('api_key', $api_key)
-					->get()
-					->count() === 1;
+					->get();
+
+		// Wrong API key
+		if ($user->count() !== 1)
+		{
+			return false;
+		}
+
+		static::$user = $user->first();
+
+		// Return the users data
+		return true;
 	}
 
+	/**
+	 * Grab the current user
+	 * @return object
+	 */
+	public static function getCurrent()
+	{
+		return static::$user;
+	}
 }

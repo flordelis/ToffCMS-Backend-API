@@ -23,15 +23,20 @@ class PageController extends \BaseController {
 	 */
 	public function store()
 	{
+		// Set up the validator
+		$validator = Page::validate(Input::all());
+		if ($validator->fails())
+		{
+			return static::response('message', $validator->messages()->all(), true);
+		}
+
 		$page = new Page;
 		$page->title = Input::get('title');
 		$page->slug = Input::get('slug');
 		$page->body = Input::get('body');
 		$page->status = Input::get('status', 'draft');
 		$page->language = Input::get('language', 'en');
-		$page->author_id = 1; // !!! ToDo
-
-		// !!! ToDo: validation
+		$page->author_id = User::getCurrent()->id;
 
 		$page->save();
 
@@ -67,14 +72,27 @@ class PageController extends \BaseController {
 	{
 		$page = Page::find($id);
 
+		// Does the page exist?
+		if ($page->exists() === false)
+		{
+			return static::response('message', 'Page with this ID doesn\'t exist.', true);
+		}
+
+		// Validate the input
+		$validator = Page::validate(Input::all(), 'update');
+		if ($validator->fails())
+		{
+			return static::response('message', $validator->messages()->all(), true);
+		}
+
+		// Set the input
 		$page->title = Input::get('title');
 		$page->slug = Input::get('slug');
 		$page->body = Input::get('body');
-		$page->status = Input::get('status', 'draft');
-		$page->language = Input::get('language', 'en');
+		$page->status = Input::get('status');
+		$page->language = Input::get('language');
 
-		// ToDo: validation
-
+		// Save
 		$page->save();
 
 		return static::response('page', $page->toArray());
