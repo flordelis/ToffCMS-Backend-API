@@ -3,7 +3,7 @@
 class Page extends Eloquent {
 
 	protected $table = 'pages';
-	protected $hidden = array('updated_at', 'status', 'author_id');
+	protected $hidden = array('updated_at', 'author_id');
 
 	public function author()
 	{

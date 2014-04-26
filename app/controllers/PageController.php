@@ -9,18 +9,10 @@ class PageController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
-	}
+		$page = Page::with('author')
+					->get();
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+		return static::response('pages', $page->toArray());
 	}
 
 
@@ -31,18 +23,19 @@ class PageController extends \BaseController {
 	 */
 	public function store()
 	{
-		// $page = new Page;
-		// $page->title = Request::get('title');
-		// $page->slug = Request::get('slug');
-		// $page->body = Request::get('body');
-		// $page->status = Request::get('status');
-		// $page->author_id = Auth::user()->id;
+		$page = new Page;
+		$page->title = Input::get('title');
+		$page->slug = Input::get('slug');
+		$page->body = Input::get('body');
+		$page->status = Input::get('status', 'draft');
+		$page->language = Input::get('language', 'en');
+		$page->author_id = 1; // !!! ToDo
 
-		// // !!! ToDo: validation
+		// !!! ToDo: validation
 
-		// $page->save();
+		$page->save();
 
-		// return static::response('message', ''); // !!! ToDo
+		return static::response('page', $page->toArray());
 	}
 
 
@@ -65,18 +58,6 @@ class PageController extends \BaseController {
 
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
@@ -84,7 +65,19 @@ class PageController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$page = Page::find($id);
+
+		$page->title = Input::get('title');
+		$page->slug = Input::get('slug');
+		$page->body = Input::get('body');
+		$page->status = Input::get('status', 'draft');
+		$page->language = Input::get('language', 'en');
+
+		// ToDo: validation
+
+		$page->save();
+
+		return static::response('page', $page->toArray());
 	}
 
 
@@ -96,7 +89,8 @@ class PageController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Page::destroy($id);
+		return static::response('status', true);
 	}
 
 

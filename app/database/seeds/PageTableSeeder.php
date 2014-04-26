@@ -36,6 +36,15 @@ Nacionālie bruņotie spēki (NBS) atvainojas par sagādātajām neērtībām, l
 			'language' => 'en',
 			'author_id' => User::first()->id
 		));
+
+		Page::create(array(
+			'title' => '2',
+			'slug' => '2',
+			'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, incidunt, voluptatibus, sunt animi aspernatur officia debitis numquam expedita harum illo accusantium reiciendis explicabo amet aperiam veritatis ut porro placeat dolor.',
+			'status' => 'draft',
+			'language' => 'en',
+			'author_id' => User::first()->id
+		));
 	}
 
 }
