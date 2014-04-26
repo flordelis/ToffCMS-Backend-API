@@ -32,7 +32,7 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$user = new User::find($id);
+		$user = User::find($id);
 
 		return static::response('user', $user->toArray());
 	}
