@@ -15,9 +15,9 @@ class LoginController extends \BaseController {
 		$password = Input::get('password');
 
 		$userdata = array(
-            'email' => $email,
-            'password' => $password
-        );
+			'email' => $email,
+			'password' => $password
+		);
 
 		// Is this a successful authorization?
 		if (Auth::attempt($userdata, false, false) === false)

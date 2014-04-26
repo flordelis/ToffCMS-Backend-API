@@ -20,7 +20,7 @@ class BaseController extends Controller {
 		return Response::json(array(
 			'error' => $error,
 			$key => $data),
-			($error ? 500 : 200)
+			($error ? 406 : 200)
 		);
 	}
 
