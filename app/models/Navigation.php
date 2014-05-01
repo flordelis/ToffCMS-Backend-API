@@ -3,8 +3,40 @@
 class Navigation extends Eloquent {
 
 	protected $table = 'navigation';
-	protected $hidden = array('page_id', 'url', 'uri', 'created_at', 'updated_at', 'page', 'parent_id');
+	protected $hidden = array('created_at', 'updated_at', 'page', 'parent_id');
 	protected $appends = array('full_url');
+
+	/**
+	 * Validate the input
+	 * @param  array $input
+	 * @param  string $type
+	 * @return Validator
+	 */
+	public static function validate($input, $type = null)
+	{
+		$allRules = array(
+			'default' => array(
+				'title'        => array('required', 'max:100'),
+				'uri'          => array('max:250'),
+				'page_id'      => array('integer'),
+				'url'          => array('max:250'),
+				'target'       => array('in:,_blank'),
+				'type'         => array('required', 'in:uri,page,website'),
+				'language'     => array('required', 'in:lv,en,ru'),
+			),
+		);
+
+		// Get the default rules
+		$rules = $allRules['default'];
+
+		// Marge in the specific rules
+		if ($type !== null && isset($allRules[$type]))
+		{
+			$rules = array_merge($rules, $allRules[$type]);
+		}
+
+		return Validator::make($input, $rules);
+	}
 
 	public function page()
 	{
@@ -51,6 +83,10 @@ class Navigation extends Eloquent {
 				return $this->attributes['url'];
 
 			case 'page':
+				if ($this->page === null) {
+					return null;
+				}
+
 				return '/' . $this->page->slug;
 
 			default:
