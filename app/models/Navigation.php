@@ -3,7 +3,7 @@
 class Navigation extends Eloquent {
 
 	protected $table = 'navigation';
-	protected $hidden = array('created_at', 'updated_at', 'page', 'parent_id');
+	protected $hidden = array('order_id', 'created_at', 'updated_at', 'page', 'parent_id');
 	protected $appends = array('full_url');
 
 	/**
