@@ -19,6 +19,10 @@ Route::get('/', function()
 // Route group for API versioning
 Route::group(array('prefix' => 'v1.0'), function()
 {
+	Route::get('page/{slug}', 'PageController@show');
+	Route::get('gallery/{slug}', 'GalleryController@show');
+	Route::get('navigation/{language}', 'NavigationController@show');
+
 	// Admin routes
 	Route::group(array('before' => 'auth.apiKey'), function()
 	{
@@ -31,10 +35,7 @@ Route::group(array('prefix' => 'v1.0'), function()
 		Route::resource('user', 'UserController');
 	});
 
-	Route::get('page/{slug}', 'PageController@show');
 	Route::get('gallery', 'GalleryController@index');
-	Route::get('gallery/{slug}', 'GalleryController@show');
-	Route::get('navigation', 'NavigationController@index');
 	Route::get('settings', 'SettingController@index');
 	Route::post('login', 'LoginController@getApiKey');
 });
