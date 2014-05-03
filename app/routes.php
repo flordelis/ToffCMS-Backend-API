@@ -23,6 +23,7 @@ Route::group(array('prefix' => 'v1.0'), function()
 	Route::group(array('before' => 'auth.apiKey'), function()
 	{
 		// Place admin routes here
+		Route::match(array('PUT'), 'navigation/order', 'NavigationController@saveOrder');
 		Route::resource('page', 'PageController');
 		Route::resource('gallery', 'GalleryController');
 		Route::resource('navigation', 'NavigationController');

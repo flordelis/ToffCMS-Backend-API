@@ -19,6 +19,17 @@ class NavigationController extends \BaseController {
 
 
 	/**
+	 * Save the order
+	 * @return Response
+	 */
+	public function saveOrder()
+	{
+		Navigation::updateOrder(Input::get('data'));
+		return static::response('message', 'Successfully saved the order');
+	}
+
+
+	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
@@ -76,7 +87,7 @@ class NavigationController extends \BaseController {
 		$nav = Navigation::find($id);
 
 		// Does the item exist?
-		if ($nav->exists() === false)
+		if ($nav === null || $nav->exists() === false)
 		{
 			return static::response('message', 'Navigation instance with this ID doesn\'t exist.', true);
 		}

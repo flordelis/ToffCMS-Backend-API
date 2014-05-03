@@ -94,4 +94,28 @@ class Navigation extends Eloquent {
 		}
 	}
 
+	/**
+	 * Update the item order
+	 * @param  array  $items
+	 * @return boolean
+	 */
+	public static function updateOrder(array $items, $parent_id = 0)
+	{
+		$index = 0;
+
+		foreach ($items as $row)
+		{
+			// $row = (object) $row;
+			Navigation::where('id', '=', $row['id'])
+			          ->update(array('order_id' => ++$index, 'parent_id' => $parent_id));
+
+			if ($row['children'])
+			{
+				self::updateOrder($row['children'], $row['id']);
+			}
+		}
+
+		return true;
+	}
+
 }
