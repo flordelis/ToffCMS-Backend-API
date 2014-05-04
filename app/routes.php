@@ -16,6 +16,9 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::get('/image/{filename}', 'ImageController@original');
+Route::get('/image/{size}/{filename}', 'ImageController@resize');
+
 // Route group for API versioning
 Route::group(array('prefix' => 'v1.0'), function()
 {
@@ -29,6 +32,8 @@ Route::group(array('prefix' => 'v1.0'), function()
 		// Place admin routes here
 		Route::match(array('PUT'), 'navigation/order', 'NavigationController@saveOrder');
 		Route::resource('page', 'PageController');
+		Route::resource('gallery/item/upload', 'GalleryItemController@upload');
+		Route::resource('gallery/item', 'GalleryItemController');
 		Route::resource('gallery', 'GalleryController');
 		Route::resource('navigation', 'NavigationController');
 		Route::resource('settings', 'SettingsController');

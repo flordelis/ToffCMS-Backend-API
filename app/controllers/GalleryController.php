@@ -9,20 +9,9 @@ class GalleryController extends \BaseController {
 	 */
 	public function index()
 	{
-		$galleries = Gallery::get();
+		$galleries = Gallery::with('items')->get();
 
 		return static::response('galleries', $galleries->toArray());
-	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
 	}
 
 
@@ -48,21 +37,14 @@ class GalleryController extends \BaseController {
 		$gallery = Gallery::where('slug', $slug)
 					->with('items')
 					->take(1)
-					->get();
+					->first();
 
-		return static::response('galleries', $gallery->toArray());
-	}
+		if ($gallery === NULL)
+		{
+			return static::response('message', 'Gallery with this slug doesn\'t exist.', true);
+		}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		return static::response('gallery', $gallery->toArray());
 	}
 
 
