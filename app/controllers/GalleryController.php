@@ -22,7 +22,20 @@ class GalleryController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$gallery = new Gallery;
+
+		// Set up the validator
+		$validator = $gallery->validate(Input::all());
+		if ($validator->fails())
+		{
+			return static::response('message', $validator->messages()->all(), true);
+		}
+
+		$gallery->title = Input::get('title');
+		$gallery->slug = Input::get('slug');
+		$gallery->save();
+
+		return static::response('gallery', $gallery->toArray());
 	}
 
 
@@ -56,7 +69,29 @@ class GalleryController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$gallery = Gallery::find($id);
+
+		// Does the item exist?
+		if ($gallery === null || $gallery->exists() === false)
+		{
+			return static::response('message', 'Gallery with this ID doesn\'t exist.', true);
+		}
+
+		// Validate the input
+		$validator = $gallery->validate(Input::all());
+		if ($validator->fails())
+		{
+			return static::response('message', $validator->messages()->all(), true);
+		}
+
+		// Set the input
+		$gallery->title = Input::get('title');
+		$gallery->slug = Input::get('slug');
+
+		// Save
+		$gallery->save();
+
+		return static::response('gallery', $gallery->toArray());
 	}
 
 
@@ -68,7 +103,8 @@ class GalleryController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Gallery::destroy($id);
+		return static::response('status', true);
 	}
 
 

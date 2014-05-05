@@ -111,7 +111,8 @@ class GalleryItemController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Gallery_Item::destroy($id);
+		return static::response('status', true);
 	}
 
 
