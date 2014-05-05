@@ -19,6 +19,8 @@ Route::get('/', function()
 Route::get('/image/{filename}', 'ImageController@original');
 Route::get('/image/{size}/{filename}', 'ImageController@resize');
 
+Route::get('developer', 'DeveloperController@index'); // ToDo: temp
+
 // Route group for API versioning
 Route::group(array('prefix' => 'v1.0'), function()
 {
