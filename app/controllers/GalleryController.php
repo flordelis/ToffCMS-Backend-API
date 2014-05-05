@@ -9,7 +9,9 @@ class GalleryController extends \BaseController {
 	 */
 	public function index()
 	{
-		$galleries = Gallery::with('items')->get();
+		$galleries = Gallery::with(array('items' => function ($query) {
+				$query->orderBy('order_id');
+			}))->get();
 
 		return static::response('galleries', $galleries->toArray());
 	}
@@ -48,7 +50,9 @@ class GalleryController extends \BaseController {
 	public function show($slug)
 	{
 		$gallery = Gallery::where('slug', $slug)
-					->with('items')
+					->with(array('items' => function ($query) {
+						$query->orderBy('order_id');
+					}))
 					->take(1)
 					->first();
 

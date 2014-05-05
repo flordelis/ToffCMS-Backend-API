@@ -31,6 +31,7 @@ Route::group(array('prefix' => 'v1.0'), function()
 	{
 		// Place admin routes here
 		Route::match(array('PUT'), 'navigation/order', 'NavigationController@saveOrder');
+		Route::match(array('PUT'), 'gallery/item/order', 'GalleryItemController@saveOrder');
 		Route::resource('page', 'PageController');
 		Route::resource('gallery/item/upload', 'GalleryItemController@upload');
 		Route::resource('gallery/item', 'GalleryItemController');

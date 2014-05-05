@@ -32,9 +32,9 @@ class GalleryItemController extends \BaseController {
 	{
 		$gallery = Gallery::find(Input::get('id'));
 
-		if ($gallery->exists() === FALSE)
+		if ($gallery === NULL)
 		{
-			return static::response('message', 'Gallery with the given ID doesn\'t exist.', true);
+			return static::response('message', array('Gallery with the given ID doesn\'t exist.'), true);
 		}
 
 		$destinationPath = Config::get('assets.images.paths.input');
@@ -42,7 +42,7 @@ class GalleryItemController extends \BaseController {
 
 		if (!is_a($file, 'Symfony\Component\HttpFoundation\File\UploadedFile'))
 		{
-			return static::response('message', 'Unknown error occurred.', true);
+			return static::response('message', array('Unknown error occurred.'), true);
 		}
 
 		$validator = Validator::make(
@@ -113,6 +113,17 @@ class GalleryItemController extends \BaseController {
 	{
 		Gallery_Item::destroy($id);
 		return static::response('status', true);
+	}
+
+
+	/**
+	 * Save the order
+	 * @return Response
+	 */
+	public function saveOrder()
+	{
+		Gallery_Item::updateOrder(Input::get('data'));
+		return static::response('message', 'Successfully saved the order');
 	}
 
 
