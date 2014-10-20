@@ -32,10 +32,7 @@ class CreatePagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('pages', function(Blueprint $table)
-		{
-			//
-		});
+		Schema::drop('pages');
 	}
 
 }

@@ -14,7 +14,7 @@ class AddTargetNavColumn extends Migration {
 	{
 		Schema::table('navigation', function(Blueprint $table)
 		{
-			$table->enum('target', array('', '_blank'));
+			$table->enum('target', array('_blank'))->nullable();
 		});
 	}
 
@@ -25,7 +25,10 @@ class AddTargetNavColumn extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::table('navigation', function (Blueprint $table)
+		{
+			$table->dropColumn('target');
+		});
 	}
 
 }

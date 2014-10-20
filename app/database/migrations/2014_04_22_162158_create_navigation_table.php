@@ -17,8 +17,8 @@ class CreateNavigationTable extends Migration {
 			$table->increments('id');
 			$table->string('title');
 			$table->enum('type', array('page', 'website', 'uri'));
-			$table->string('uri');
-			$table->string('url');
+			$table->string('uri')->nullable();
+			$table->string('url')->nullable();
 			$table->integer('page_id');
 			$table->integer('order_id');
 			$table->enum('language', array('lv', 'en', 'ru'));
