@@ -77,7 +77,7 @@ class Navigation extends Eloquent {
 		switch ($this->attributes['type'])
 		{
 			case 'uri':
-				return $this->attributes['uri'];
+				return '/'. ltrim($this->attributes['uri'], '/');
 
 			case 'website':
 				return $this->attributes['url'];
