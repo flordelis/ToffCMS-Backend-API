@@ -27,6 +27,7 @@ Route::group(array('prefix' => 'v1.0'), function()
 	Route::get('page/{slug}', 'PageController@show');
 	Route::get('gallery/{slug}', 'GalleryController@show');
 	Route::get('navigation/{language}', 'NavigationController@show');
+	Route::get('settings/frontend', 'SettingController@frontend');
 
 	// Admin routes
 	Route::group(array('before' => 'auth.apiKey'), function()
@@ -39,11 +40,11 @@ Route::group(array('prefix' => 'v1.0'), function()
 		Route::resource('gallery/item', 'GalleryItemController');
 		Route::resource('gallery', 'GalleryController');
 		Route::resource('navigation', 'NavigationController');
-		Route::resource('settings', 'SettingsController');
 		Route::resource('user', 'UserController');
+		Route::resource('settings', 'SettingController');
 	});
 
 	Route::get('gallery', 'GalleryController@index');
-	Route::get('settings', 'SettingController@index');
 	Route::post('login', 'LoginController@getApiKey');
+
 });

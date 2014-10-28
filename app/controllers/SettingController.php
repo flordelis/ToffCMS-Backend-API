@@ -9,7 +9,13 @@ class SettingController extends \BaseController {
 	 */
 	public function index()
 	{
-		$settings = Setting::where('is_public', 'Y')
+		$settings = BackendSetting::get();
+		return static::response('settings', $settings->toArray());
+	}
+
+	public function frontend()
+	{
+		$settings = FrontendSetting::where('is_public', 'Y')
 							->get();
 
 		$return = array();
@@ -20,8 +26,6 @@ class SettingController extends \BaseController {
 		}
 
 		return static::response('settings', $return);
-
 	}
-
 
 }

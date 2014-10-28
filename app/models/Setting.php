@@ -1,9 +1,8 @@
 <?php
 
-class Setting extends Eloquent {
+abstract class Setting extends Eloquent {
 
 	protected $table = 'settings';
-	protected $visible = array('key', 'value');
 
 	public function getIdAttribute($value)
 	{
@@ -13,6 +12,15 @@ class Setting extends Eloquent {
 	public function getValueAttribute($value)
 	{
 		return empty($value) ? $this->attributes['default'] : $value;
+	}
+
+	public function getAvailableValuesAttribute($value)
+	{
+		if (strpos($value, '|') === false) {
+			return $value;
+		}
+
+		return explode('|', $value);
 	}
 
 }
