@@ -118,4 +118,20 @@ class Navigation extends Eloquent {
 		return true;
 	}
 
+	public static function findFirstLevel()
+	{
+		return self::where('parent_id', 0)
+					->with('children')
+					->orderBy('order_id')
+					->get();
+	}
+
+	public static function findByLanguage($language)
+	{
+		return self::where('language', $language)
+					->where('parent_id', 0)
+					->with('children')
+					->orderBy('order_id')
+					->get();
+	}
 }

@@ -9,11 +9,7 @@ class NavigationController extends \BaseController {
 	 */
 	public function index()
 	{
-		$nav = Navigation::where('parent_id', 0)
-					->with('children')
-					->orderBy('order_id')
-					->get();
-
+		$nav = Navigation::findFirstLevel();
 		return static::response('navigation', $nav->toArray());
 	}
 
@@ -66,12 +62,7 @@ class NavigationController extends \BaseController {
 	 */
 	public function show($language)
 	{
-		$nav = Navigation::where('language', $language)
-					->where('parent_id', 0)
-					->with('children')
-					->orderBy('order_id')
-					->get();
-
+		$nav = Navigation::findByLanguage($language);
 		return static::response('navigation', $nav->toArray());
 	}
 
