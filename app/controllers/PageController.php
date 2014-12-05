@@ -23,7 +23,6 @@ class PageController extends NewBaseController {
 	public function index()
 	{
 		$page = $this->page->getWithAuthor();
-
 		return static::response($page->toArray());
 	}
 
@@ -35,15 +34,7 @@ class PageController extends NewBaseController {
 	 */
 	public function store()
 	{
-		try {
-			$page = $this->page->create(Input::all());
-		} catch (ValidationException $e) {
-			return static::response(
-				$e->allMessages(),
-				Status::HTTP_NOT_ACCEPTABLE
-			);
-		}
-
+		$page = $this->page->create(Input::all());
 		return static::response($page->toArray());
 	}
 
@@ -57,7 +48,6 @@ class PageController extends NewBaseController {
 	public function show($slug)
 	{
 		$page = $this->page->getForShow($slug, Input::get('language'));
-
 		return static::response($page->toArray());
 	}
 
@@ -70,20 +60,7 @@ class PageController extends NewBaseController {
 	 */
 	public function update($id)
 	{
-		try {
-			$page = $this->page->update($id, Input::all());
-		} catch (ModelNotFoundException $e) {
-			return static::response(
-				$e->getMessage(),
-				Status::HTTP_NOT_FOUND
-			);
-		} catch (ValidationException $e) {
-			return static::response(
-				$e->allMessages(),
-				Status::HTTP_NOT_ACCEPTABLE
-			);
-		}
-
+		$page = $this->page->update($id, Input::all());
 		return static::response($page->toArray());
 	}
 
