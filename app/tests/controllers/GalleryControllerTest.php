@@ -34,6 +34,25 @@ class GalleryControllerTest extends TestCase {
 		$this->assertResponseStatus(Status::HTTP_NOT_FOUND);
 	}
 
+	public function testStoreSuccess()
+	{
+		$this->call('POST', 'v1.0/gallery', array(
+			'title' => 'My World',
+			'slug' => 'my-world',
+		));
+		$this->assertResponseOk();
+	}
+
+	/**
+	 * @expectedException ValidationException
+	 */
+	public function testStoreFail()
+	{
+		$this->call('POST', 'v1.0/gallery', array(
+			'slug' => 'my-world-two',
+		));
+	}
+
 	public function testUpdateSuccess()
 	{
 		$this->call('PATCH', 'v1.0/gallery/1', array(

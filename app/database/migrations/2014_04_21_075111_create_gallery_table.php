@@ -17,7 +17,7 @@ class CreateGalleryTable extends Migration {
 			$table->increments('id');
 			$table->string('title', 100);
 			$table->string('slug', 100)->unique();
-			$table->enum('status', array('live', 'draft'));
+			$table->enum('status', array('live', 'draft'))->default('draft');
 			$table->timestamps();
 		});
 

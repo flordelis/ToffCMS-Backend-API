@@ -8,6 +8,7 @@ class Gallery extends EloquentExtension {
 		'default' => array(
 			'title'        => array('required', 'max:100'),
 			'slug'         => array('required', 'max:100'),
+			'status'       => array('in:draft,live'),
 		),
 	);
 
@@ -21,18 +22,6 @@ class Gallery extends EloquentExtension {
 		$rules = parent::getRules('update');
 		$rules['slug'][] = 'unique:gallery,slug,' . $this->id;
 		return $rules;
-	}
-
-	/**
-	 * Validation rules
-	 * @return array
-	 */
-	public function rules()
-	{
-		return array(
-			'title'        => array('required', 'max:100'),
-			'slug'         => array('required', 'max:100', 'unique:gallery,slug,' . $this->id),
-		);
 	}
 
 	public function items()

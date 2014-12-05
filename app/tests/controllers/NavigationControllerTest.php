@@ -43,6 +43,28 @@ class NavigationControllerTest extends TestCase {
 		$this->assertResponseOk();
 	}
 
+	public function testStoreSuccess()
+	{
+		$this->call('POST', 'v1.0/navigation', array(
+			'title' => 'Hello World',
+			'type' => 'website',
+			'language' => 'en',
+			'url' => 'http://google.com/',
+		));
+		$this->assertResponseOk();
+	}
+
+	/**
+	 * @expectedException ValidationException
+	 */
+	public function testStoreFail()
+	{
+		$this->call('POST', 'v1.0/navigation', array(
+			'type' => 'website',
+			'language' => 'en',
+		));
+	}
+
 	public function testUpdateSuccess()
 	{
 		$this->call('PATCH', 'v1.0/navigation/1', array(
