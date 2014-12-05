@@ -24,7 +24,7 @@
                 <directory>./app/migrations</directory>
                 <directory>./app/views</directory>
                 <directory>./app/lang</directory>
-                <directory>./tests</directory>
+                <directory>./app/tests</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>
