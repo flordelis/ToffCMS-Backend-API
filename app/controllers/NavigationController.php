@@ -46,15 +46,7 @@ class NavigationController extends NewBaseController {
 	 */
 	public function store()
 	{
-		try {
-			$nav = $this->navigation->create(Input::all());
-		} catch (ValidationException $e) {
-			return static::response(
-				$e->allMessages(),
-				Status::HTTP_NOT_ACCEPTABLE
-			);
-		}
-
+		$nav = $this->navigation->create(Input::all());
 		return static::response($nav->toArray());
 	}
 
@@ -80,20 +72,7 @@ class NavigationController extends NewBaseController {
 	 */
 	public function update($id)
 	{
-		try {
-			$nav = $this->navigation->update($id, Input::all());
-		} catch (ModelNotFoundException $e) {
-			return static::response(
-				$e->getMessage(),
-				Status::HTTP_NOT_FOUND
-			);
-		} catch (ValidationException $e) {
-			return static::response(
-				$e->allMessages(),
-				Status::HTTP_NOT_ACCEPTABLE
-			);
-		}
-
+		$nav = $this->navigation->update($id, Input::all());
 		return static::response($nav->toArray());
 	}
 
