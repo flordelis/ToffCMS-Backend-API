@@ -14,7 +14,7 @@ class CreateSubnavigations extends Migration {
 	{
 		Schema::table('navigation', function (Blueprint $table)
 		{
-			$table->integer('parent_id');
+			$table->integer('parent_id')->nullable();
 		});
 	}
 

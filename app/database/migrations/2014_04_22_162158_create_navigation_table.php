@@ -20,7 +20,7 @@ class CreateNavigationTable extends Migration {
 			$table->string('uri')->nullable();
 			$table->string('url')->nullable();
 			$table->integer('page_id')->nullable();
-			$table->integer('order_id');
+			$table->integer('order_id')->nullable();
 			$table->enum('language', array('lv', 'en', 'ru'));
 			$table->timestamps();
 		});
