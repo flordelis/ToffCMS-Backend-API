@@ -46,6 +46,27 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 |
 */
 
+// Model not found
+App::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $exception, $code)
+{
+	return Response::json(array(
+		'error' => true,
+		'data' => $exception->getMessage(),
+		'count' => 0,
+	), 404);
+});
+
+// Validation exceptions
+App::error(function(ValidationException $exception)
+{
+	return Response::json(array(
+		'error' => true,
+		'data' => $exception->getMessage(),
+		'count' => 0,
+	), Status::HTTP_NOT_ACCEPTABLE);
+});
+
+// Other exceptions
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);

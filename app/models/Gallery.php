@@ -1,18 +1,26 @@
 <?php
 
-class Gallery extends \Eloquent {
+class Gallery extends EloquentExtension {
 
 	protected $table = 'gallery';
 	protected $hidden = array('updated_at', 'status');
+	public static $rules = array(
+		'default' => array(
+			'title'        => array('required', 'max:100'),
+			'slug'         => array('required', 'max:100'),
+		),
+	);
 
 	/**
-	 * Validate the input
-	 * @param  array $input
-	 * @return Validator
+	 * Grab the rules.
+	 * @param  string $key
+	 * @return array
 	 */
-	public function validate($input)
+	public function getUpdateRules()
 	{
-	    return Validator::make($input, $this->rules());
+		$rules = parent::getRules('update');
+		$rules['slug'][] = 'unique:gallery,slug,' . $this->id;
+		return $rules;
 	}
 
 	/**

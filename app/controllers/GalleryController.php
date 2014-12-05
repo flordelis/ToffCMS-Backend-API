@@ -1,6 +1,19 @@
 <?php
 
-class GalleryController extends \BaseController {
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+class GalleryController extends NewBaseController {
+
+	protected $gallery;
+
+	/**
+	 * Constructor
+	 * @param GalleryRepository $gallery
+	 */
+	public function __construct(GalleryRepository $gallery)
+	{
+		$this->gallery = $gallery;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,11 +22,8 @@ class GalleryController extends \BaseController {
 	 */
 	public function index()
 	{
-		$galleries = Gallery::with(array('items' => function ($query) {
-				$query->orderBy('order_id');
-			}))->get();
-
-		return static::response('galleries', $galleries->toArray());
+		$galleries = $this->gallery->findWithItems();
+		return static::response($galleries->toArray());
 	}
 
 
@@ -24,20 +34,8 @@ class GalleryController extends \BaseController {
 	 */
 	public function store()
 	{
-		$gallery = new Gallery;
-
-		// Set up the validator
-		$validator = $gallery->validate(Input::all());
-		if ($validator->fails())
-		{
-			return static::response('message', $validator->messages()->all(), true);
-		}
-
-		$gallery->title = Input::get('title');
-		$gallery->slug = Input::get('slug');
-		$gallery->save();
-
-		return static::response('gallery', $gallery->toArray());
+		$gallery = $this->gallery->create(Input::all());
+		return static::response($gallery->toArray());
 	}
 
 
@@ -49,19 +47,8 @@ class GalleryController extends \BaseController {
 	 */
 	public function show($slug)
 	{
-		$gallery = Gallery::where('slug', $slug)
-					->with(array('items' => function ($query) {
-						$query->orderBy('order_id');
-					}))
-					->take(1)
-					->first();
-
-		if ($gallery === NULL)
-		{
-			return static::response('message', 'Gallery with this slug doesn\'t exist.', true);
-		}
-
-		return static::response('gallery', $gallery->toArray());
+		$gallery = $this->gallery->findBySlug($slug);
+		return static::response($gallery->toArray());
 	}
 
 
@@ -73,29 +60,8 @@ class GalleryController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$gallery = Gallery::find($id);
-
-		// Does the item exist?
-		if ($gallery === null || $gallery->exists() === false)
-		{
-			return static::response('message', 'Gallery with this ID doesn\'t exist.', true);
-		}
-
-		// Validate the input
-		$validator = $gallery->validate(Input::all());
-		if ($validator->fails())
-		{
-			return static::response('message', $validator->messages()->all(), true);
-		}
-
-		// Set the input
-		$gallery->title = Input::get('title');
-		$gallery->slug = Input::get('slug');
-
-		// Save
-		$gallery->save();
-
-		return static::response('gallery', $gallery->toArray());
+		$gallery = $this->gallery->update($id, Input::all());
+		return static::response($gallery->toArray());
 	}
 
 
@@ -107,8 +73,8 @@ class GalleryController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Gallery::destroy($id);
-		return static::response('status', true);
+		$this->gallery->delete($id);
+		return static::response(true);
 	}
 
 
