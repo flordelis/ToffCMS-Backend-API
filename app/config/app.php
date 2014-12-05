@@ -188,6 +188,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Imagine'         => 'Orchestra\Imagine\Facade',
 		'Image'           => 'App\Libraries\Facades\Image',
+		'Status'          => 'Symfony\Component\HttpFoundation\Response',
 
 	),
 

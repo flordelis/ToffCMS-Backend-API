@@ -1,7 +1,5 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Response;
-
 class PageControllerTest extends TestCase {
 
 	/**
@@ -37,6 +35,33 @@ class PageControllerTest extends TestCase {
 	/**
 	 * @return void
 	 */
+	// public function testStoreSuccess()
+	// {
+	// 	$this->call('POST', 'v1.0/page', array(
+	// 		'title' => 'Hello World',
+	// 		'slug' => 'hello-world',
+	// 		'body' => 'Lorem ipsum dolor sit amet',
+	// 	));
+	// 	$this->assertResponseOk();
+	// }
+
+	/**
+	 * Attempt to update without a slug field.
+	 * This should result in a validation error.
+	 * @return void
+	 */
+	public function testStoreFail()
+	{
+		$this->call('POST', 'v1.0/page', array(
+			'title' => 'Hello World',
+			'body' => 'Lorem ipsum dolor sit amet',
+		));
+		$this->assertResponseStatus(Status::HTTP_NOT_ACCEPTABLE);
+	}
+
+	/**
+	 * @return void
+	 */
 	public function testUpdateSuccess()
 	{
 		$page = Page::first();
@@ -53,18 +78,18 @@ class PageControllerTest extends TestCase {
 	/**
 	 * Attempt to update without a slug field.
 	 * This should result in a validation error.
+     * @dataProvider testUpdateFailData
 	 * @return void
-	 */
-	public function testUpdateFail()
+     */
+	public function testUpdateFail($id, $exists = true)
 	{
-		$page = Page::first();
-		$this->call('PATCH', 'v1.0/page/' . $page->id, array(
+		$this->call('PATCH', 'v1.0/page/' . $id, array(
 			'title' => 'Hello World',
 			'body' => 'Lorem ipsum dolor sit amet',
 			'status' => 'live',
 			'language' => 'en',
 		));
-		$this->assertResponseStatus(Response::HTTP_NOT_ACCEPTABLE);
+		$this->assertResponseStatus($exists ? Status::HTTP_NOT_ACCEPTABLE : Status::HTTP_NOT_FOUND);
 	}
 
 	/**
@@ -75,5 +100,16 @@ class PageControllerTest extends TestCase {
 		$page = Page::first();
 		$this->call('DELETE', 'v1.0/page/' . $page->id);
 		$this->assertResponseOk();
+	}
+
+	public function testUpdateFailData()
+	{
+		// $page = Page::first();
+
+		return array(
+			array(1),
+			array(99, false),
+			// array($page->id),
+		);
 	}
 }

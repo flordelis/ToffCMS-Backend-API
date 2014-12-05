@@ -1,6 +1,17 @@
 <?php
 
-class PageController extends \BaseController {
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+class PageController extends NewBaseController {
+
+	/**
+	 * Constructor
+	 * @param PageRepository $page
+	 */
+	public function __construct(PageRepository $page)
+	{
+		$this->page = $page;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,10 +20,9 @@ class PageController extends \BaseController {
 	 */
 	public function index()
 	{
-		$page = Page::with('author')
-					->get();
+		$page = $this->page->getWithAuthor();
 
-		return static::response('pages', $page->toArray());
+		return static::response($page->toArray());
 	}
 
 
@@ -23,24 +33,16 @@ class PageController extends \BaseController {
 	 */
 	public function store()
 	{
-		// Set up the validator
-		$validator = Page::validate(Input::all());
-		if ($validator->fails())
-		{
-			return static::response('message', $validator->messages()->all(), true);
+		try {
+			$page = $this->page->create(Input::all());
+		} catch (ValidationException $e) {
+			return static::response(
+				$e->allMessages(),
+				Status::HTTP_NOT_ACCEPTABLE
+			);
 		}
 
-		$page = new Page;
-		$page->title = Input::get('title');
-		$page->slug = Input::get('slug');
-		$page->body = Input::get('body');
-		$page->status = Input::get('status', 'draft');
-		$page->language = Input::get('language', 'en');
-		$page->author_id = User::getCurrent()->id;
-
-		$page->save();
-
-		return static::response('page', $page->toArray());
+		return static::response($page->toArray());
 	}
 
 
@@ -52,14 +54,9 @@ class PageController extends \BaseController {
 	 */
 	public function show($slug)
 	{
-		$page = Page::where('slug', $slug)
-		            ->where('status', 'live')
-					->where('language', Input::get('language', 'en'))
-					->with('author')
-					->take(1)
-					->get();
+		$page = $this->page->getForShow($slug, Input::get('language'));
 
-		return static::response('pages', $page->toArray());
+		return static::response($page->toArray());
 	}
 
 
@@ -71,34 +68,22 @@ class PageController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$page = Page::find($id);
-
-		// Does the page exist?
-		if ($page->exists() === false)
-		{
-			return static::response('message', 'Page with this ID doesn\'t exist.', true);
+		try {
+			$page = $this->page->update($id, Input::all());
+		} catch (ModelNotFoundException $e) {
+			return static::response(
+				$e->getMessage(),
+				Status::HTTP_NOT_FOUND
+			);
+		} catch (ValidationException $e) {
+			return static::response(
+				$e->allMessages(),
+				Status::HTTP_NOT_ACCEPTABLE
+			);
 		}
 
-		// Validate the input
-		$validator = Page::validate(Input::all(), 'update');
-		if ($validator->fails())
-		{
-			return static::response('message', $validator->messages()->all(), true);
-		}
-
-		// Set the input
-		$page->title = Input::get('title');
-		$page->slug = Input::get('slug');
-		$page->body = Input::get('body');
-		$page->status = Input::get('status');
-		$page->language = Input::get('language');
-
-		// Save
-		$page->save();
-
-		return static::response('page', $page->toArray());
+		return static::response($page->toArray());
 	}
-
 
 	/**
 	 * Remove the specified resource from storage.
@@ -108,8 +93,8 @@ class PageController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Page::destroy($id);
-		return static::response('status', true);
+		$this->page->delete($id);
+		return static::response(true);
 	}
 
 

@@ -18,8 +18,8 @@ class CreatePagesTable extends Migration {
 			$table->string('title', 100);
 			$table->string('slug', 100)->unique();
 			$table->text('body');
-			$table->enum('status', array('live', 'draft'));
-			$table->enum('language', array('en', 'lv', 'ru'));
+			$table->enum('status', array('live', 'draft'))->default('draft');
+			$table->enum('language', array('en', 'lv', 'ru'))->default('en');
 			$table->integer('author_id');
 			$table->timestamps();
 		});

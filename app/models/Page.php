@@ -1,41 +1,35 @@
 <?php
 
-class Page extends Eloquent {
+class Page extends EloquentExtension {
 
 	protected $table = 'pages';
 	protected $hidden = array('updated_at', 'author_id');
+	public static $rules = array(
+		'default' => array(
+			'title'        => array('required', 'max:100'),
+			'slug'         => array('required', 'max:100', 'unique:pages,slug,null,id,language,en'),
+			'status'       => array('in:draft,live'),
+			'language'     => array('in:lv,en,ru'),
+			'body'         => array('required')
+		),
+		'update' => array(
+			'slug'         => array('required', 'max:100'),
+		),
+	);
 
 	/**
-	 * Validate the input
-	 * @param  array $input
-	 * @param  string $type
-	 * @return Validator
+	 * Grabt the rules.
+	 * @param  string $key
+	 * @return array
 	 */
-	public static function validate($input, $type = null)
+	public static function getRules($key = null)
 	{
-		$allRules = array(
-			'default' => array(
-				'title'        => array('required', 'max:100'),
-				'slug'         => array('required', 'max:100', 'unique:pages,slug,null,id,language,'. Input::get('language')),
-				'status'       => array('in:draft,live'),
-				'language'     => array('in:lv,en,ru'),
-				'body'         => array('required')
-			),
-			'update' => array(
-				'slug'         => array('required', 'max:100'),
-			)
-		);
+		$rules = parent::getRules($key);
 
-		// Get the default rules
-		$rules = $allRules['default'];
+		// Append an extra (dynamic) rule
+		$rules['slug'][] = 'unique:pages,slug,null,id,language,'. Input::get('language');
 
-		// Marge in the specific rules
-		if ($type !== null && isset($allRules[$type]))
-		{
-			$rules = array_merge($rules, $allRules[$type]);
-		}
-
-		return Validator::make($input, $rules);
+		return $rules;
 	}
 
 	public function author()
