@@ -1,6 +1,8 @@
 <?php
 
-class PageRepository {
+class PageRepository extends Repository {
+
+	protected static $model = 'Page';
 
 	/**
 	 * Get all of the pages w/ author.
@@ -34,21 +36,6 @@ class PageRepository {
 	}
 
 	/**
-	 * Update a page.
-	 * @param  integer $id
-	 * @param  array $input
-	 * @return Page
-	 */
-	public function update($id, array $input)
-	{
-		$page = Page::findOrFail($id);
-		Page::validateOrFail($input, 'update');
-
-		$page->save($input);
-		return $page;
-	}
-
-	/**
 	 * Create a new page.
 	 * @param  array $input
 	 * @return Page
@@ -62,15 +49,5 @@ class PageRepository {
 		$page->save();
 
 		return $page;
-	}
-
-	/**
-	 * Delete the page
-	 * @param  integer $id
-	 * @return boolean
-	 */
-	public function delete($id)
-	{
-		return Page::destroy($id);
 	}
 }

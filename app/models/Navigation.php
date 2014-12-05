@@ -1,42 +1,21 @@
 <?php
 
-class Navigation extends Eloquent {
+class Navigation extends EloquentExtension {
 
 	protected $table = 'navigation';
 	protected $hidden = array('order_id', 'created_at', 'updated_at', 'page', 'parent_id');
 	protected $appends = array('full_url');
-
-	/**
-	 * Validate the input
-	 * @param  array $input
-	 * @param  string $type
-	 * @return Validator
-	 */
-	public static function validate($input, $type = null)
-	{
-		$allRules = array(
-			'default' => array(
-				'title'        => array('required', 'max:100'),
-				'uri'          => array('max:250'),
-				'page_id'      => array('integer'),
-				'url'          => array('max:250'),
-				'target'       => array('in:,_blank'),
-				'type'         => array('required', 'in:uri,page,website'),
-				'language'     => array('required', 'in:lv,en,ru'),
-			),
-		);
-
-		// Get the default rules
-		$rules = $allRules['default'];
-
-		// Marge in the specific rules
-		if ($type !== null && isset($allRules[$type]))
-		{
-			$rules = array_merge($rules, $allRules[$type]);
-		}
-
-		return Validator::make($input, $rules);
-	}
+	public static $rules = array(
+		'default' => array(
+			'title'        => array('required', 'max:100'),
+			'uri'          => array('max:250'),
+			'page_id'      => array('integer'),
+			'url'          => array('max:250'),
+			'target'       => array('in:,_blank'),
+			'type'         => array('required', 'in:uri,page,website'),
+			'language'     => array('required', 'in:lv,en,ru'),
+		),
+	);
 
 	public function page()
 	{
@@ -94,44 +73,4 @@ class Navigation extends Eloquent {
 		}
 	}
 
-	/**
-	 * Update the item order
-	 * @param  array  $items
-	 * @return boolean
-	 */
-	public static function updateOrder(array $items, $parent_id = 0)
-	{
-		$index = 0;
-
-		foreach ($items as $row)
-		{
-			// $row = (object) $row;
-			Navigation::where('id', '=', $row['id'])
-			          ->update(array('order_id' => ++$index, 'parent_id' => $parent_id));
-
-			if ($row['children'])
-			{
-				self::updateOrder($row['children'], $row['id']);
-			}
-		}
-
-		return true;
-	}
-
-	public static function findFirstLevel()
-	{
-		return self::where('parent_id', 0)
-					->with('children')
-					->orderBy('order_id')
-					->get();
-	}
-
-	public static function findByLanguage($language)
-	{
-		return self::where('language', $language)
-					->where('parent_id', 0)
-					->with('children')
-					->orderBy('order_id')
-					->get();
-	}
 }

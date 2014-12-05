@@ -1,6 +1,20 @@
 <?php
 
-class NavigationController extends \BaseController {
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+class NavigationController extends NewBaseController {
+
+	protected $navigation;
+
+	/**
+	 * Constructor
+	 * @param  NavigationRepository $navigation
+	 * @return void
+	 */
+	public function __construct(NavigationRepository $navigation)
+	{
+		$this->navigation = $navigation;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,8 +23,8 @@ class NavigationController extends \BaseController {
 	 */
 	public function index()
 	{
-		$nav = Navigation::findFirstLevel();
-		return static::response('navigation', $nav->toArray());
+		$nav = $this->navigation->findFirstLevel();
+		return static::response($nav->toArray());
 	}
 
 
@@ -20,8 +34,8 @@ class NavigationController extends \BaseController {
 	 */
 	public function saveOrder()
 	{
-		Navigation::updateOrder(Input::get('data'));
-		return static::response('message', 'Successfully saved the order');
+		$this->navigation->updateOrder(Input::get('data'));
+		return static::response('Successfully saved the order');
 	}
 
 
@@ -32,25 +46,16 @@ class NavigationController extends \BaseController {
 	 */
 	public function store()
 	{
-		// Set up the validator
-		$validator = Navigation::validate(Input::all());
-		if ($validator->fails())
-		{
-			return static::response('message', $validator->messages()->all(), true);
+		try {
+			$nav = $this->navigation->create(Input::all());
+		} catch (ValidationException $e) {
+			return static::response(
+				$e->allMessages(),
+				Status::HTTP_NOT_ACCEPTABLE
+			);
 		}
 
-		$nav = new Navigation;
-		$nav->title = Input::get('title');
-		$nav->type = Input::get('type');
-		$nav->uri = Input::get('uri');
-		$nav->page_id = Input::get('page_id');
-		$nav->url = Input::get('url');
-		$nav->target = Input::get('target');
-		$nav->language = Input::get('language');
-
-		$nav->save();
-
-		return static::response('page', $nav->toArray());
+		return static::response($nav->toArray());
 	}
 
 
@@ -62,8 +67,8 @@ class NavigationController extends \BaseController {
 	 */
 	public function show($language)
 	{
-		$nav = Navigation::findByLanguage($language);
-		return static::response('navigation', $nav->toArray());
+		$nav = $this->navigation->findByLanguage($language);
+		return static::response($nav->toArray());
 	}
 
 
@@ -75,34 +80,21 @@ class NavigationController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$nav = Navigation::find($id);
-
-		// Does the item exist?
-		if ($nav === null || $nav->exists() === false)
-		{
-			return static::response('message', 'Navigation instance with this ID doesn\'t exist.', true);
+		try {
+			$nav = $this->navigation->update($id, Input::all());
+		} catch (ModelNotFoundException $e) {
+			return static::response(
+				$e->getMessage(),
+				Status::HTTP_NOT_FOUND
+			);
+		} catch (ValidationException $e) {
+			return static::response(
+				$e->allMessages(),
+				Status::HTTP_NOT_ACCEPTABLE
+			);
 		}
 
-		// Validate the input
-		$validator = Navigation::validate(Input::all(), 'update');
-		if ($validator->fails())
-		{
-			return static::response('message', $validator->messages()->all(), true);
-		}
-
-		// Set the input
-		$nav->title = Input::get('title');
-		$nav->type = Input::get('type');
-		$nav->uri = Input::get('uri');
-		$nav->page_id = Input::get('page_id');
-		$nav->url = Input::get('url');
-		$nav->target = Input::get('target');
-		$nav->language = Input::get('language');
-
-		// Save
-		$nav->save();
-
-		return static::response('page', $nav->toArray());
+		return static::response($nav->toArray());
 	}
 
 
@@ -114,8 +106,8 @@ class NavigationController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Navigation::destroy($id);
-		return static::response('status', true);
+		$this->navigation->delete($id);
+		return static::response(true);
 	}
 
 }

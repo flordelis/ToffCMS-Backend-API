@@ -4,6 +4,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PageController extends NewBaseController {
 
+	protected $page;
+
 	/**
 	 * Constructor
 	 * @param PageRepository $page

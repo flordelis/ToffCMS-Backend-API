@@ -64,8 +64,7 @@ class PageControllerTest extends TestCase {
 	 */
 	public function testUpdateSuccess()
 	{
-		$page = Page::first();
-		$this->call('PATCH', 'v1.0/page/' . $page->id, array(
+		$this->call('PATCH', 'v1.0/page/1', array(
 			'title' => 'Hello World',
 			'slug' => 'hello-world',
 			'body' => 'Lorem ipsum dolor sit amet',
@@ -97,19 +96,19 @@ class PageControllerTest extends TestCase {
 	 */
 	public function testDestroy()
 	{
-		$page = Page::first();
-		$this->call('DELETE', 'v1.0/page/' . $page->id);
+		$this->call('DELETE', 'v1.0/page/1');
 		$this->assertResponseOk();
 	}
 
+	/**
+	 * Data used for update tests.
+	 * @return array
+	 */
 	public function testUpdateFailData()
 	{
-		// $page = Page::first();
-
 		return array(
 			array(1),
 			array(99, false),
-			// array($page->id),
 		);
 	}
 }
