@@ -17,8 +17,8 @@ class Page extends Eloquent {
 			'default' => array(
 				'title'        => array('required', 'max:100'),
 				'slug'         => array('required', 'max:100', 'unique:pages,slug,null,id,language,'. Input::get('language')),
-				'status'       => array('required', 'in:draft,live'),
-				'language'     => array('required', 'in:lv,en,ru'),
+				'status'       => array('in:draft,live'),
+				'language'     => array('in:lv,en,ru'),
 				'body'         => array('required')
 			),
 			'update' => array(

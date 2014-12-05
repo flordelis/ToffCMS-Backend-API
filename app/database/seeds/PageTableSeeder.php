@@ -4,6 +4,7 @@ class PageTableSeeder extends Seeder {
 
 	public function run()
 	{
+		Eloquent::unguard();
 		DB::table('pages')->delete();
 
 		Page::create(array(
