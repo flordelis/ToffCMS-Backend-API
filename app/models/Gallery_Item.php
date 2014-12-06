@@ -4,6 +4,11 @@ class Gallery_Item extends Eloquent {
 
 	protected $table = 'gallery_items';
 	protected $hidden = array('created_at', 'updated_at', 'gallery_id');
+	public static $rules = array(
+		'file' => array(
+			'file' => array('required|mimes:jpeg,png,jpg|image|max:2048'),
+		),
+	);
 
 	public function gallery()
 	{
@@ -45,24 +50,6 @@ class Gallery_Item extends Eloquent {
 		}
 
 		return parent::destroy($id);
-	}
-
-	/**
-	 * Update the item order
-	 * @param  array  $items
-	 * @return boolean
-	 */
-	public static function updateOrder(array $items)
-	{
-		$index = 0;
-
-		foreach ($items as $row)
-		{
-			Gallery_Item::where('id', '=', $row['id'])
-			            ->update(array('order_id' => ++$index));
-		}
-
-		return true;
 	}
 
 }
