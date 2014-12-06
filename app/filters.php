@@ -33,17 +33,6 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::guest('login');
-});
-
-
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
-});
-
 Route::filter('auth.apiKey', function ()
 {
 	if (User::validAPIKey(Input::get('api_key'), Input::get('user_id')) === FALSE)
