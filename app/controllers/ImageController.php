@@ -1,10 +1,10 @@
 <?php
 
-class ImageController extends \BaseController {
+class ImageController extends BaseController {
 
 	/**
 	 * Get and return a single image
-	 * 
+	 *
 	 * @return Response
 	 */
 	public function original($filename)
@@ -13,7 +13,7 @@ class ImageController extends \BaseController {
 		$file = new Symfony\Component\HttpFoundation\File\File($path);
 
 		$response = Response::make(
-			File::get($path), 
+			File::get($path),
 			200
 		);
 
@@ -28,7 +28,7 @@ class ImageController extends \BaseController {
 
 	/**
 	 * Resize an image
-	 * 
+	 *
 	 * @param  string $size
 	 * @param  string $filename
 	 * @return Response

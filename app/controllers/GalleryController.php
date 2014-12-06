@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class GalleryController extends NewBaseController {
+class GalleryController extends BaseController {
 
 	protected $gallery;
 

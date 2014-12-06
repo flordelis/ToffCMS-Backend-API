@@ -1,6 +1,6 @@
 <?php
 
-class GalleryItemController extends NewBaseController {
+class GalleryItemController extends BaseController {
 
 	protected $item;
 	protected $gallery;

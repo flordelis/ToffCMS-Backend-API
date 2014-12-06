@@ -1,6 +1,6 @@
 <?php
 
-class SettingController extends NewBaseController {
+class SettingController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.

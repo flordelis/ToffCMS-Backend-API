@@ -2,7 +2,7 @@
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class LoginController extends NewBaseController {
+class LoginController extends BaseController {
 
 	protected $user;
 

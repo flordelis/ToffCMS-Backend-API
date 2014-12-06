@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends NewBaseController {
+class UserController extends BaseController {
 
 	protected $user;
 

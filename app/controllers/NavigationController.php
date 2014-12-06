@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class NavigationController extends NewBaseController {
+class NavigationController extends BaseController {
 
 	protected $navigation;
 

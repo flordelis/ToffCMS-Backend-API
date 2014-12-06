@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class PageController extends NewBaseController {
+class PageController extends BaseController {
 
 	protected $page;
 

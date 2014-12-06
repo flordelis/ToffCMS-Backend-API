@@ -68,4 +68,24 @@ class GalleryItemRepository extends Repository {
 
 		return $filename;
 	}
+
+	public function delete($id)
+	{
+		$item = Gallery_Item::findOrFail($id);
+
+		// In case this is an image - delete cache
+		if ($item->type === 'image')
+		{
+			// Delete the main image
+			File::delete(Config::get('assets.images.paths.input') . $item->content);
+
+			// Delete resized images
+			foreach (Config::get('assets.images.sizes') as $size => $data)
+			{
+				File::delete(Config::get('assets.images.paths.output') . $size . '_' . $item->content);
+			}
+		}
+
+		return parent::delete($id);
+	}
 }
