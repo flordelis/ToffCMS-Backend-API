@@ -1,6 +1,17 @@
 <?php
 
-class UserController extends \BaseController {
+class UserController extends NewBaseController {
+
+	protected $user;
+
+	/**
+	 * Constructor
+	 * @param UserRepository $user
+	 */
+	public function __construct(UserRepository $user)
+	{
+		$this->user = $user;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -32,9 +43,8 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$user = User::find($id);
-
-		return static::response('user', $user->toArray());
+		$user = $this->user->findOrFail($id);
+		return static::response($user->toArray());
 	}
 
 

@@ -5,14 +5,24 @@ abstract class Repository {
 	protected static $model;
 
 	/**
+	 * Find or fail the model.
+	 * @param  integer $id
+	 * @return Objcet
+	 */
+	public static function findOrFail($id)
+	{
+		return static::getModel()->findOrFail($id);
+	}
+
+	/**
 	 * Update a page.
 	 * @param  integer $id
 	 * @param  array $input
-	 * @return Page
+	 * @return Object
 	 */
 	public function update($id, array $input)
 	{
-		$page = static::getModel()->findOrFail($id);
+		$page = static::findOrFail($id);
 		static::getModel()->validateOrFail($input, 'update');
 
 		$page->save($input);
@@ -22,7 +32,7 @@ abstract class Repository {
 	/**
 	 * Create a new page.
 	 * @param  array $input
-	 * @return Page
+	 * @return Object
 	 */
 	public function create($input)
 	{
