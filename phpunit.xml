@@ -25,6 +25,7 @@
                 <directory>./app/views</directory>
                 <directory>./app/lang</directory>
                 <directory>./app/tests</directory>
+                <directory>./app/start</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>

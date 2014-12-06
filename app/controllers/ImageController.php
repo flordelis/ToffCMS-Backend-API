@@ -1,6 +1,6 @@
 <?php
 
-class ImageController extends BaseController {
+class ImageController extends Controller {
 
 	/**
 	 * Get and return a single image
@@ -12,19 +12,11 @@ class ImageController extends BaseController {
 		$path = Config::get('assets.images.paths.input') . $filename;
 		$file = new Symfony\Component\HttpFoundation\File\File($path);
 
-		$response = Response::make(
+		return static::response(
 			File::get($path),
-			200
-		);
-
-		$response->header(
-			'Content-type',
 			$file->getMimeType()
 		);
-
-		return $response;
 	}
-
 
 	/**
 	 * Resize an image
@@ -35,18 +27,23 @@ class ImageController extends BaseController {
 	 */
 	public function resize($size, $filename)
 	{
-		$response = Response::make(
+		return static::response(
 			Image::resize($filename, $size),
-			200
-		);
-
-		$response->header(
-			'content-type',
 			Image::getMimeType($filename)
 		);
-
-		return $response;
 	}
 
+	/**
+	 * Build the response output
+	 * @param  object $data
+	 * @param  string $mimeType
+	 * @return Response
+	 */
+	public function response($data, $mimeType)
+	{
+		$response = Response::make($data, 200);
+		$response->header('content-type', $mimeType);
+		return $response;
+	}
 
 }
