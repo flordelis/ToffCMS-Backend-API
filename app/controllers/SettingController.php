@@ -1,6 +1,6 @@
 <?php
 
-class SettingController extends \BaseController {
+class SettingController extends NewBaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,7 +10,7 @@ class SettingController extends \BaseController {
 	public function index()
 	{
 		$settings = BackendSetting::get();
-		return static::response('settings', $settings->toArray());
+		return static::response($settings->toArray());
 	}
 
 	public function frontend()
@@ -25,7 +25,7 @@ class SettingController extends \BaseController {
 			$return[$setting->key] = $setting->value;
 		}
 
-		return static::response('settings', $return);
+		return static::response($return);
 	}
 
 }

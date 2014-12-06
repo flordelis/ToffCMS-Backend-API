@@ -16,12 +16,12 @@ class CreateSettingTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('description');
+			$table->string('description')->nullable();
 			$table->string('key');
-			$table->string('default');
-			$table->string('value');
-			$table->string('available_values');
-			$table->enum('is_public', array('N', 'Y'));
+			$table->string('default')->nullable();
+			$table->string('value')->nullable();
+			$table->string('available_values')->nullable();
+			$table->enum('is_public', array('N', 'Y'))->default('N');
 			$table->timestamps();
 		});
 	}
