@@ -45,7 +45,7 @@ class PageRepository extends Repository {
 		Page::validateOrFail($input);
 
 		$page = new Page($input);
-		$page->author_id = User::getCurrent()->id;
+		$page->author_id = Auth::user()->id;
 		$page->save();
 
 		return $page;

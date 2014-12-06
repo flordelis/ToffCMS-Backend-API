@@ -36,28 +36,17 @@ class User extends Eloquent implements UserInterface {
 	 */
 	public static function validAPIKey($api_key, $user_id)
 	{
-		$user = self::where('id', $user_id)
-					->where('api_key', $api_key)
-					->get();
-
-		// Wrong API key
-		if ($user->count() !== 1)
-		{
+		try {
+			$user = self::where('id', $user_id)
+				->where('api_key', $api_key)
+				->firstOrFail();
+		} catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return false;
 		}
 
-		static::$user = $user->first();
+		Auth::loginUsingId($user->id);
 
 		// Return the users data
 		return true;
-	}
-
-	/**
-	 * Grab the current user
-	 * @return object
-	 */
-	public static function getCurrent()
-	{
-		return static::$user;
 	}
 }

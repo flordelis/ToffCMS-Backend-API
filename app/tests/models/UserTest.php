@@ -21,9 +21,4 @@ class UserTest extends TestCase {
 		$this->assertTrue(User::validAPIKey($user->api_key, $user->id));
 	}
 
-	public function testGetCurrent()
-	{
-		$this->assertTrue(User::getCurrent() instanceof User);
-	}
-
 }

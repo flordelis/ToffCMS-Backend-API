@@ -19,10 +19,7 @@ class NavigationControllerTest extends TestCase {
 		$this->assertResponseOk();
 	}
 
-	/**
-	 * Save the order of navigation
-	 */
-	public function testSaveOrder()
+	public function testSaveOrderSuccess()
 	{
 		$this->call('PUT', 'v1.0/navigation/order', array(
 			'data' => array(
@@ -35,6 +32,21 @@ class NavigationControllerTest extends TestCase {
 			),
 		));
 		$this->assertResponseOk();
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testSaveOrderFail()
+	{
+		$this->call('PUT', 'v1.0/navigation/order', array(
+			'data' => array(
+				array('id' => 3),
+				array('children' => array(
+					array('id' => 5),
+				)),
+			),
+		));
 	}
 
 	public function testShow()

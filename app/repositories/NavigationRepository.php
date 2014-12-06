@@ -42,7 +42,7 @@ class NavigationRepository extends Repository {
 		foreach ($items as $row)
 		{
 			if (isset($row['id']) === false) {
-				continue;
+				throw new InvalidArgumentException('ID must be set');
 			}
 
 			Navigation::where('id', '=', $row['id'])

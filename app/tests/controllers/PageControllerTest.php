@@ -26,15 +26,16 @@ class PageControllerTest extends TestCase {
 		$this->assertResponseOk();
 	}
 
-	// public function testStoreSuccess()
-	// {
-	// 	$this->call('POST', 'v1.0/page', array(
-	// 		'title' => 'Hello World',
-	// 		'slug' => 'hello-world',
-	// 		'body' => 'Lorem ipsum dolor sit amet',
-	// 	));
-	// 	$this->assertResponseOk();
-	// }
+	public function testStoreSuccess()
+	{
+		$this->be(User::find(1));
+		$this->call('POST', 'v1.0/page', array(
+			'title' => 'Hello World',
+			'slug' => 'hello-world',
+			'body' => 'Lorem ipsum dolor sit amet',
+		));
+		$this->assertResponseOk();
+	}
 
 	/**
 	 * Attempt to update without a slug field.
