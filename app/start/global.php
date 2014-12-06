@@ -56,6 +56,16 @@ App::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $except
 	), 404);
 });
 
+// Authentication exception
+App::error(function(\Symfony\Component\Security\Core\Exception\AuthenticationException $exception)
+{
+	return Response::json(array(
+		'error' => true,
+		'data' => 'Wrong email and/or password',
+		'count' => 0,
+	), Status::HTTP_UNAUTHORIZED);
+});
+
 // Validation exceptions
 App::error(function(ValidationException $exception)
 {

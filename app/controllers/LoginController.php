@@ -1,6 +1,19 @@
 <?php
 
-class LoginController extends \BaseController {
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+
+class LoginController extends NewBaseController {
+
+	protected $user;
+
+	/**
+	 * Constructor
+	 * @param UserRepository $user [description]
+	 */
+	public function __construct(UserRepository $user)
+	{
+		$this->user = $user;
+	}
 
 	/**
 	 * Used for logging in the current user
@@ -22,17 +35,14 @@ class LoginController extends \BaseController {
 		// Is this a successful authorization?
 		if (Auth::attempt($userdata, false, false) === false)
 		{
-			return static::response('message', 'Wrong email/password', true);
+			throw new AuthenticationException();
 		}
 
 		// Get the userdata
-		$user = User::where('email', $email)
-					->take(1)
-					->get()
-					->toArray();
+		$user = $this->user->findByEmail($email);
 
 		// Return the api key
-		return static::response('user', $user[0]);
+		return static::response($user->toArray());
 	}
 
 }
