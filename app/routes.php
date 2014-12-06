@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
 Route::get('/image/{filename}', 'ImageController@original');
 Route::get('/image/{size}/{filename}', 'ImageController@resize');
 
