@@ -1,24 +1,23 @@
-AddHandler application/x-httpd-php53 .php
 Header set Access-Control-Allow-Origin "*"
 Header set Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS"
 Header set Access-Control-Allow-Credentials "true"
 Header set Access-Control-Allow-Headers "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
+	<IfModule mod_negotiation.c>
+		Options -MultiViews
+	</IfModule>
 
-    RewriteEngine On
+	RewriteEngine On
 
-    # Redirect Trailing Slashes...
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
+	# Redirect Trailing Slashes...
+	RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+	# Handle Front Controller...
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^ index.php [L]
 </IfModule>
 
 <ifmodule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript application/json
+	AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript application/json
 </ifmodule>
