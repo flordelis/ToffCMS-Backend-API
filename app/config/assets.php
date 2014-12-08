@@ -4,8 +4,8 @@ return array(
     'images' => array(
 
         'paths' => array(
-            'input' => '../app/storage/cache/uploads/',
-            'output' => '../app/storage/cache/images/'
+            'input' => 'app/storage/cache/uploads/',
+            'output' => 'app/storage/cache/images/'
         ),
 
         'sizes' => array(

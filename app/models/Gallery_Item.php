@@ -1,12 +1,12 @@
 <?php
 
-class Gallery_Item extends Eloquent {
+class Gallery_Item extends EloquentExtension {
 
 	protected $table = 'gallery_items';
 	protected $hidden = array('created_at', 'updated_at', 'gallery_id');
 	public static $rules = array(
 		'file' => array(
-			'file' => array('required|mimes:jpeg,png,jpg|image|max:2048'),
+			'file' => array('required', 'mimes:jpeg,png,jpg,gif', 'image', 'max:2048'),
 		),
 	);
 

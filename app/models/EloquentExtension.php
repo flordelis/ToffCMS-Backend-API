@@ -8,7 +8,11 @@ class EloquentExtension extends Eloquent {
 
 	public static function getRules($key = null)
 	{
-		$rules = static::$rules['default'];
+		$rules = array();
+
+		if (isset(static::$rules['default']) ) {
+			$rules = static::$rules['default'];
+		}
 
 		// Marge in the specific rules
 		if ($key !== null && isset(static::$rules[$key]))

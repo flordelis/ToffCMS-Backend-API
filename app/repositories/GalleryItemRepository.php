@@ -44,27 +44,16 @@ class GalleryItemRepository extends Repository {
 	 * @param Symfony\Component\HttpFoundation\File\UploadedFile $file
 	 * @return string
 	 */
-	public function upload($file)
+	public function upload(\Symfony\Component\HttpFoundation\File\UploadedFile $file)
 	{
-		$destinationPath = Config::get('assets.images.paths.input');
-
-		if (!is_a($file, 'Symfony\Component\HttpFoundation\File\UploadedFile'))
-		{
-			throw new Exception('Unknown uploading error occurred. Wrong class.');
-		}
-
 		static::getModel()->validateOrFail(array('file' => $file), 'file');
 
 		$filename = str_random(8) . '.' . $file->guessExtension();
 
-		$status = $file->move(
+		$file->move(
 			Config::get('assets.images.paths.input'),
 			$filename
 		);
-
-		if (!$status) {
-			throw new Exception('Unknown uploading error occurred. Wrong status.');
-		}
 
 		return $filename;
 	}

@@ -30,7 +30,7 @@ class GalleryItemController extends BaseController {
 		$file = Input::file('file');
 		$filename = $this->item->upload($file);
 
-		$item = $this->item->create($gallery, $filename);
+		$item = $this->item->createWithUpload($gallery, $filename);
 		return static::response($item->toArray());
 	}
 
