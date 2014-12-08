@@ -2,9 +2,9 @@
 
 class DeveloperController extends BaseController {
 
-	public function index()
-	{
-		return Artisan::call('migrate');
-	}
+    public function index()
+    {
+        return Artisan::call('migrate');
+    }
 
 }

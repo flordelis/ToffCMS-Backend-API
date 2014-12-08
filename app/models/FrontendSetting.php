@@ -2,6 +2,6 @@
 
 class FrontendSetting extends \Setting {
 
-	protected $visible = array('key', 'value');
+    protected $visible = array('key', 'value');
 
 }

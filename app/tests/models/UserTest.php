@@ -2,23 +2,23 @@
 
 class UserTest extends TestCase {
 
-	/**
-	 * Set the seeds
-	 */
-	public function setUp()
-	{
-		parent::setUp();
+    /**
+     * Set the seeds
+     */
+    public function setUp()
+    {
+        parent::setUp();
 
-		Eloquent::unguard();
-		$this->seed('UserTableSeeder');
-	}
+        Eloquent::unguard();
+        $this->seed('UserTableSeeder');
+    }
 
-	public function testValidAPIKey()
-	{
-		$user = User::find(1);
+    public function testValidAPIKey()
+    {
+        $user = User::find(1);
 
-		$this->assertFalse(User::validAPIKey('invalid key', $user->id));
-		$this->assertTrue(User::validAPIKey($user->api_key, $user->id));
-	}
+        $this->assertFalse(User::validAPIKey('invalid key', $user->id));
+        $this->assertTrue(User::validAPIKey($user->api_key, $user->id));
+    }
 
 }
