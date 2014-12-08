@@ -1,11 +1,20 @@
 <?php
 
+/**
+ * Uploaded image viewing and resizing.
+ *
+ * PHP version 5
+ *
+ * @category Image
+ * @package  ToffCMS
+ * @author   Matiss Janis Aboltins <matiss@mja.lv>
+ * @link     http://www.mja.lv/
+ */
 class ImageController extends Controller
 {
-
     /**
      * Get and return a single image
-     *
+     * @param  string $filename The filename of file to be displayed
      * @return Response
      */
     public function original($filename)
@@ -21,9 +30,8 @@ class ImageController extends Controller
 
     /**
      * Resize an image
-     *
-     * @param  string $size
-     * @param  string $filename
+     * @param  string $size     The chosen size of the image
+     * @param  string $filename The filename of file to be displayed
      * @return Response
      */
     public function resize($size, $filename)
@@ -36,8 +44,8 @@ class ImageController extends Controller
 
     /**
      * Build the response output
-     * @param  object $data
-     * @param  string $mimeType
+     * @param  object $data     Output the file
+     * @param  string $mimeType The mimetype of the output
      * @return Response
      */
     public function response($data, $mimeType)
@@ -46,5 +54,4 @@ class ImageController extends Controller
         $response->header('content-type', $mimeType);
         return $response;
     }
-
 }

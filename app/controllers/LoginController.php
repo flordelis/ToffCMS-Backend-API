@@ -2,14 +2,23 @@
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
+/**
+ * Manage login actions.
+ *
+ * PHP version 5
+ *
+ * @category API
+ * @package  ToffCMS
+ * @author   Matiss Janis Aboltins <matiss@mja.lv>
+ * @link     http://www.mja.lv/
+ */
 class LoginController extends BaseController
 {
-
     protected $user;
 
     /**
      * Constructor
-     * @param UserRepository $user [description]
+     * @param UserRepository $user User reository
      */
     public function __construct(UserRepository $user)
     {
@@ -20,7 +29,6 @@ class LoginController extends BaseController
      * Used for logging in the current user
      * Basically check the email/password and
      * returns the API key for further usage.
-     *
      * @return Response
      */
     public function getApiKey()
@@ -44,5 +52,4 @@ class LoginController extends BaseController
         // Return the api key
         return static::response($user->toArray());
     }
-
 }

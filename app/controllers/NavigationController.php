@@ -1,14 +1,22 @@
 <?php
 
+/**
+ * Navigation management
+ *
+ * PHP version 5
+ *
+ * @category API
+ * @package  ToffCMS
+ * @author   Matiss Janis Aboltins <matiss@mja.lv>
+ * @link     http://www.mja.lv/
+ */
 class NavigationController extends BaseController
 {
-
     protected $navigation;
 
     /**
      * Constructor
-     * @param  NavigationRepository $navigation
-     * @return void
+     * @param  NavigationRepository $navigation Navigation repository
      */
     public function __construct(NavigationRepository $navigation)
     {
@@ -17,7 +25,6 @@ class NavigationController extends BaseController
 
     /**
      * Display a listing of the resource.
-     *
      * @return Response
      */
     public function index()
@@ -40,7 +47,6 @@ class NavigationController extends BaseController
 
     /**
      * Store a newly created resource in storage.
-     *
      * @return Response
      */
     public function store()
@@ -52,8 +58,7 @@ class NavigationController extends BaseController
 
     /**
      * Display the specified resource.
-     *
-     * @param  string $language
+     * @param  string $language In which language should we return the nav?
      * @return Response
      */
     public function show($language)
@@ -65,8 +70,7 @@ class NavigationController extends BaseController
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
+     * @param  int $id Primary key of a nav instance
      * @return Response
      */
     public function update($id)
@@ -78,8 +82,7 @@ class NavigationController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  int $id Primary key of a navigation instance
      * @return Response
      */
     public function destroy($id)
@@ -87,5 +90,4 @@ class NavigationController extends BaseController
         $this->navigation->delete($id);
         return static::response(true);
     }
-
 }

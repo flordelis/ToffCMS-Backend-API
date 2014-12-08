@@ -1,13 +1,22 @@
 <?php
 
+/**
+ * User management
+ *
+ * PHP version 5
+ *
+ * @category API
+ * @package  ToffCMS
+ * @author   Matiss Janis Aboltins <matiss@mja.lv>
+ * @link     http://www.mja.lv/
+ */
 class UserController extends BaseController
 {
-
     protected $user;
 
     /**
      * Constructor
-     * @param UserRepository $user
+     * @param UserRepository $user User repository
      */
     public function __construct(UserRepository $user)
     {
@@ -16,8 +25,7 @@ class UserController extends BaseController
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param  int $id Primary key of the user to be retrieved
      * @return Response
      */
     public function show($id)
@@ -25,5 +33,4 @@ class UserController extends BaseController
         $user = $this->user->findOrFail($id);
         return static::response($user->toArray());
     }
-
 }

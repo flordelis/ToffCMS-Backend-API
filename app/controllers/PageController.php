@@ -1,13 +1,22 @@
 <?php
 
+/**
+ * Page management
+ *
+ * PHP version 5
+ *
+ * @category API
+ * @package  ToffCMS
+ * @author   Matiss Janis Aboltins <matiss@mja.lv>
+ * @link     http://www.mja.lv/
+ */
 class PageController extends BaseController
 {
-
     protected $page;
 
     /**
      * Constructor
-     * @param PageRepository $page
+     * @param PageRepository $page Page repository
      */
     public function __construct(PageRepository $page)
     {
@@ -16,7 +25,6 @@ class PageController extends BaseController
 
     /**
      * Display a listing of the resource.
-     *
      * @return Response
      */
     public function index()
@@ -28,7 +36,6 @@ class PageController extends BaseController
 
     /**
      * Store a newly created resource in storage.
-     *
      * @return Response
      */
     public function store()
@@ -40,8 +47,7 @@ class PageController extends BaseController
 
     /**
      * Display the specified resource.
-     *
-     * @param  string $slug
+     * @param  string $slug Slug of the post to be shown.
      * @return Response
      */
     public function show($slug)
@@ -53,8 +59,7 @@ class PageController extends BaseController
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int $id
+     * @param  int $id Primary key of the post
      * @return Response
      */
     public function update($id)
@@ -65,8 +70,7 @@ class PageController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int $id
+     * @param  int $id Primary key of the post.
      * @return Response
      */
     public function destroy($id)
@@ -74,6 +78,4 @@ class PageController extends BaseController
         $this->page->delete($id);
         return static::response(true);
     }
-
-
 }
