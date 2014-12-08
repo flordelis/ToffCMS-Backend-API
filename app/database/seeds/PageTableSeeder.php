@@ -1,7 +1,7 @@
 <?php
 
-class PageTableSeeder extends Seeder {
-
+class PageTableSeeder extends Seeder
+{
     public function run()
     {
         DB::table('pages')->delete();
@@ -46,5 +46,4 @@ Nacionālie bruņotie spēki (NBS) atvainojas par sagādātajām neērtībām, l
             'author_id' => User::first()->id
         ));
     }
-
 }

@@ -1,7 +1,7 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase {
-
+class TestCase extends \Illuminate\Foundation\Testing\TestCase
+{
     /**
      * Default preparation for each test
      *
@@ -36,5 +36,4 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
         Artisan::call('migrate');
         Mail::pretend(true);
     }
-
 }

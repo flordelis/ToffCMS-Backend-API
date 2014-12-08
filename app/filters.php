@@ -11,15 +11,13 @@
 |
 */
 
-App::before(function($request)
-{
-	//
+App::before(function($request) {
+    //
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function($request, $response) {
+    //
 });
 
 /*
@@ -33,12 +31,10 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth.apiKey', function ()
-{
-	if (User::validAPIKey(Input::get('api_key'), Input::get('user_id')) === FALSE)
-	{
-		return App::abort(401);
-	}
+Route::filter('auth.apiKey', function () {
+    if (User::validAPIKey(Input::get('api_key'), Input::get('user_id')) === false) {
+        return App::abort(401);
+    }
 });
 
 /*
@@ -54,7 +50,7 @@ Route::filter('auth.apiKey', function ()
 
 // Route::filter('guest', function()
 // {
-// 	if (Auth::check()) return Redirect::to('/');
+//  if (Auth::check()) return Redirect::to('/');
 // });
 
 /*
@@ -70,8 +66,8 @@ Route::filter('auth.apiKey', function ()
 
 // Route::filter('csrf', function()
 // {
-// 	if (Session::token() != Input::get('_token'))
-// 	{
-// 		throw new Illuminate\Session\TokenMismatchException;
-// 	}
+//  if (Session::token() != Input::get('_token'))
+//  {
+//      throw new Illuminate\Session\TokenMismatchException;
+//  }
 // });

@@ -1,7 +1,7 @@
 <?php
 
-class GalleryTableSeeder extends Seeder {
-
+class GalleryTableSeeder extends Seeder
+{
     public function run()
     {
         DB::table('gallery')->delete();
@@ -25,5 +25,4 @@ class GalleryTableSeeder extends Seeder {
             'gallery_id' => 1
         ));
     }
-
 }

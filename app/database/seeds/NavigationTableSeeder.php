@@ -1,7 +1,7 @@
 <?php
 
-class NavigationTableSeeder extends Seeder {
-
+class NavigationTableSeeder extends Seeder
+{
     protected $languages = array(
         'lv',
         'en',
@@ -14,8 +14,7 @@ class NavigationTableSeeder extends Seeder {
 
         $i = 0;
 
-        foreach ($this->languages as $lang)
-        {
+        foreach ($this->languages as $lang) {
             $page = Page::where('language', $lang)->first();
 
             $parent = Navigation::create(array(
@@ -26,8 +25,7 @@ class NavigationTableSeeder extends Seeder {
                 'order_id' => ++$i
             ));
 
-            if ($page)
-            {
+            if ($page) {
                 Navigation::create(array(
                     'title' => $page->title . ' (' . $lang . ')',
                     'type' => 'page',
@@ -54,8 +52,7 @@ class NavigationTableSeeder extends Seeder {
                 'order_id' => ++$i
             ));
 
-            for ($j = 1; $j <= rand(2, 6); $j++)
-            {
+            for ($j = 1; $j <= rand(2, 6); $j++) {
                 Navigation::create(array(
                     'title' => 'Item #' . $j,
                     'type' => 'uri',
@@ -66,9 +63,5 @@ class NavigationTableSeeder extends Seeder {
                 ));
             }
         }
-
-
-
     }
-
 }

@@ -1,7 +1,7 @@
 <?php
 
-class SettingTableSeeder extends Seeder {
-
+class SettingTableSeeder extends Seeder
+{
     public function run()
     {
         DB::table('settings')->delete();
@@ -22,5 +22,4 @@ class SettingTableSeeder extends Seeder {
         ));
 
     }
-
 }

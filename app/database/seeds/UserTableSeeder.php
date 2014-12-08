@@ -1,7 +1,7 @@
 <?php
 
-class UserTableSeeder extends Seeder {
-
+class UserTableSeeder extends Seeder
+{
     public function run()
     {
         DB::table('users')->delete();
@@ -18,5 +18,4 @@ class UserTableSeeder extends Seeder {
             'api_key' => sha1('key#2')
         ));
     }
-
 }

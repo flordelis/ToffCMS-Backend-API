@@ -13,10 +13,10 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path().'/commands',
+    app_path().'/controllers',
+    app_path().'/models',
+    app_path().'/database/seeds',
 
 ));
 
@@ -47,39 +47,35 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 */
 
 // Model not found
-App::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $exception, $code)
-{
-	return Response::json(array(
-		'error' => true,
-		'data' => $exception->getMessage(),
-		'count' => 0,
-	), 404);
+App::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $exception, $code) {
+    return Response::json(array(
+        'error' => true,
+        'data' => $exception->getMessage(),
+        'count' => 0,
+    ), 404);
 });
 
 // Authentication exception
-App::error(function(\Symfony\Component\Security\Core\Exception\AuthenticationException $exception)
-{
-	return Response::json(array(
-		'error' => true,
-		'data' => 'Wrong email and/or password',
-		'count' => 0,
-	), Status::HTTP_UNAUTHORIZED);
+App::error(function(\Symfony\Component\Security\Core\Exception\AuthenticationException $exception) {
+    return Response::json(array(
+        'error' => true,
+        'data' => 'Wrong email and/or password',
+        'count' => 0,
+    ), Status::HTTP_UNAUTHORIZED);
 });
 
 // Validation exceptions
-App::error(function(ValidationException $exception)
-{
-	return Response::json(array(
-		'error' => true,
-		'data' => $exception->getMessage(),
-		'count' => 0,
-	), Status::HTTP_NOT_ACCEPTABLE);
+App::error(function(ValidationException $exception) {
+    return Response::json(array(
+        'error' => true,
+        'data' => $exception->getMessage(),
+        'count' => 0,
+    ), Status::HTTP_NOT_ACCEPTABLE);
 });
 
 // Other exceptions
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
+App::error(function(Exception $exception, $code) {
+    Log::error($exception);
 });
 
 /*
@@ -93,9 +89,8 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::down(function()
-{
-	return Response::make("Be right back!", 503);
+App::down(function() {
+    return Response::make("Be right back!", 503);
 });
 
 /*

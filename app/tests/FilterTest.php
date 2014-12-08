@@ -1,7 +1,7 @@
 <?php
 
-class FilterTest extends TestCase {
-
+class FilterTest extends TestCase
+{
     /**
      * Set the seeds
      */
@@ -34,5 +34,4 @@ class FilterTest extends TestCase {
         Route::enableFilters();
         $this->call('GET', 'v1.0/user/1');
     }
-
 }
