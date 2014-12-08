@@ -20,6 +20,7 @@
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
             <exclude>
+            	<file>./app/controllers/DeveloperController.php</file>
                 <directory>./app/config</directory>
                 <directory>./app/migrations</directory>
                 <directory>./app/views</directory>
