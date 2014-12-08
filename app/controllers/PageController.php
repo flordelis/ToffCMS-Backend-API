@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
-class PageController extends BaseController {
+class PageController extends BaseController
+{
 
     protected $page;
 
@@ -55,7 +54,7 @@ class PageController extends BaseController {
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function update($id)
@@ -67,7 +66,7 @@ class PageController extends BaseController {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)

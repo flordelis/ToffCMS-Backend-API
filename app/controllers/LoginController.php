@@ -2,7 +2,8 @@
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class LoginController extends BaseController {
+class LoginController extends BaseController
+{
 
     protected $user;
 
@@ -33,8 +34,7 @@ class LoginController extends BaseController {
         );
 
         // Is this a successful authorization?
-        if (Auth::attempt($userdata, false, false) === false)
-        {
+        if (Auth::attempt($userdata, false, false) === false) {
             throw new AuthenticationException();
         }
 

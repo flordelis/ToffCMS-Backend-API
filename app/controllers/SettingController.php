@@ -1,6 +1,7 @@
 <?php
 
-class SettingController extends BaseController {
+class SettingController extends BaseController
+{
 
     /**
      * Display a listing of the resource.
@@ -20,8 +21,7 @@ class SettingController extends BaseController {
 
         $return = array();
 
-        foreach ($settings as $setting)
-        {
+        foreach ($settings as $setting) {
             $return[$setting->key] = $setting->value;
         }
 

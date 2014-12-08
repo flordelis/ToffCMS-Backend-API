@@ -1,6 +1,7 @@
 <?php
 
-class ImageController extends Controller {
+class ImageController extends Controller
+{
 
     /**
      * Get and return a single image

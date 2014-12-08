@@ -1,6 +1,7 @@
 <?php
 
-class BaseController extends Controller {
+class BaseController extends Controller
+{
 
     protected static function response($data, $error = Status::HTTP_OK)
     {

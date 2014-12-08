@@ -1,6 +1,7 @@
 <?php
 
-class DeveloperController extends BaseController {
+class DeveloperController extends BaseController
+{
 
     public function index()
     {

@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
-class GalleryController extends BaseController {
+class GalleryController extends BaseController
+{
 
     protected $gallery;
 
@@ -42,7 +41,7 @@ class GalleryController extends BaseController {
     /**
      * Display the specified resource.
      *
-     * @param  string  $slug
+     * @param  string $slug
      * @return Response
      */
     public function show($slug)
@@ -55,7 +54,7 @@ class GalleryController extends BaseController {
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function update($id)
@@ -68,7 +67,7 @@ class GalleryController extends BaseController {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
