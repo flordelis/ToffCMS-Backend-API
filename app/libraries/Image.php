@@ -9,7 +9,10 @@ class Image {
 
     protected $imagine;
 
-    // We instantiate the Imagine library with Imagick or GD
+    /**
+     * We instantiate the Imagine library with Imagick or GD
+     * @codeCoverageIgnore
+     */
     public function __construct($library = null)
     {
         if ( !$this->imagine) {
@@ -54,10 +57,12 @@ class Image {
         $size = new \Imagine\Image\Box($width, $height);
         $mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
 
+        // @codeCoverageIgnoreStart
         // Create the output directory if it doesn't exist yet.
         if (!File::isDirectory($outputDir)) {
             File::makeDirectory($outputDir);
         }
+        // @codeCoverageIgnoreEnd
 
         // Open the file, resize it and save it.
         $this->imagine->open($inputFile)

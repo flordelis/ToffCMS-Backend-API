@@ -46,7 +46,21 @@ class GalleryItemControllerTest extends TestCase {
 
 	public function testDestroy()
 	{
-		$this->call('DELETE', 'v1.0/gallery/item/1');
+		// Create new dummy images
+		$img = imagecreate(1, 1);
+		imagecolorallocate($img, 0, 0, 255);
+		imagepng($img, Config::get('assets.images.paths.input') . 'test.png');
+		imagepng($img, Config::get('assets.images.paths.output') . 'small_test.png');
+
+		// Create an actual gallery item
+		$item = Gallery_Item::create(array(
+			'type' => 'image',
+			'content' => 'test.png',
+			'gallery_id' => 1
+		));
+
+		// Delete this item
+		$this->call('DELETE', 'v1.0/gallery/item/' . $item->id);
 		$this->assertResponseOk();
 	}
 
