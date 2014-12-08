@@ -1,5 +1,6 @@
 <?php
 
-class BackendSetting extends \Setting {
+class BackendSetting extends \Setting
+{
 
 }

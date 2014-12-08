@@ -1,7 +1,7 @@
 <?php
 
-class Gallery extends EloquentExtension {
-
+class Gallery extends EloquentExtension
+{
     protected $table = 'gallery';
     protected $hidden = array('updated_at', 'status');
     public static $rules = array(
@@ -26,7 +26,7 @@ class Gallery extends EloquentExtension {
 
     public function items()
     {
-        return $this->hasMany('Gallery_Item');
+        return $this->hasMany('GalleryItem');
     }
 
     public function getIdAttribute($value)
@@ -42,13 +42,11 @@ class Gallery extends EloquentExtension {
     {
         $gallery = self::find($id);
 
-        if ($gallery->exists())
-        {
-            $items = Gallery_Item::where('gallery_id', '=', $gallery->id)->get();
+        if ($gallery->exists()) {
+            $items = GalleryItem::where('gallery_id', '=', $gallery->id)->get();
 
-            foreach ($items as $item)
-            {
-                Gallery_Item::destroy($item->id);
+            foreach ($items as $item) {
+                GalleryItem::destroy($item->id);
             }
         }
 

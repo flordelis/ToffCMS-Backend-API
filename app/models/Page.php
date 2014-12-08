@@ -1,7 +1,7 @@
 <?php
 
-class Page extends EloquentExtension {
-
+class Page extends EloquentExtension
+{
     protected $table = 'pages';
     protected $hidden = array('updated_at', 'author_id');
     public static $rules = array(
@@ -47,5 +47,4 @@ class Page extends EloquentExtension {
     {
         return (int) $value;
     }
-
 }

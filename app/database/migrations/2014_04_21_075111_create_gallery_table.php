@@ -21,7 +21,7 @@ class CreateGalleryTable extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('gallery_items', function(Blueprint $table)
+        Schema::create('GalleryItems', function(Blueprint $table)
         {
             $table->increments('id');
             $table->enum('type', array('video', 'image'));
@@ -39,7 +39,7 @@ class CreateGalleryTable extends Migration {
     public function down()
     {
         Schema::drop('gallery');
-        Schema::drop('gallery_items');
+        Schema::drop('GalleryItems');
     }
 
 }

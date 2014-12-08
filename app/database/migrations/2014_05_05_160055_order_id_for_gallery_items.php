@@ -12,7 +12,7 @@ class OrderIdForGalleryItems extends Migration {
      */
     public function up()
     {
-        Schema::table('gallery_items', function(Blueprint $table)
+        Schema::table('GalleryItems', function(Blueprint $table)
         {
             $table->integer('order_id')->nullable();
         });
@@ -25,7 +25,7 @@ class OrderIdForGalleryItems extends Migration {
      */
     public function down()
     {
-        Schema::table('gallery_items', function(Blueprint $table)
+        Schema::table('GalleryItems', function(Blueprint $table)
         {
             $table->dropColumn('order_id');
         });

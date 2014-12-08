@@ -56,7 +56,7 @@ class GalleryItemControllerTest extends TestCase {
         imagepng($img, Config::get('assets.images.paths.output') . 'small_test.png');
 
         // Create an actual gallery item
-        $item = Gallery_Item::create(array(
+        $item = GalleryItem::create(array(
             'type' => 'image',
             'content' => 'test.png',
             'gallery_id' => 1

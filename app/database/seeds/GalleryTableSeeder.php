@@ -5,7 +5,7 @@ class GalleryTableSeeder extends Seeder {
     public function run()
     {
         DB::table('gallery')->delete();
-        DB::table('gallery_items')->delete();
+        DB::table('GalleryItems')->delete();
 
         Gallery::create(array(
             'title' => 'Test',
@@ -19,7 +19,7 @@ class GalleryTableSeeder extends Seeder {
             'status' => 'live'
         ));
 
-        Gallery_Item::create(array(
+        GalleryItem::create(array(
             'type' => 'video',
             'content' => 'test',
             'gallery_id' => 1

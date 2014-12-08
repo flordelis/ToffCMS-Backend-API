@@ -1,7 +1,7 @@
 <?php
 
-class NavigationRepository extends Repository {
-
+class NavigationRepository extends Repository
+{
     protected static $model = 'Navigation';
 
     /**
@@ -10,7 +10,7 @@ class NavigationRepository extends Repository {
      */
     public static function findFirstLevel()
     {
-        return Navigation::where('parent_id', NULL)
+        return Navigation::where('parent_id', null)
             ->with('children')
             ->orderBy('order_id')
             ->get();
@@ -24,7 +24,7 @@ class NavigationRepository extends Repository {
     public static function findByLanguage($language)
     {
         return Navigation::where('language', $language)
-            ->where('parent_id', NULL)
+            ->where('parent_id', null)
             ->with('children')
             ->orderBy('order_id')
             ->get();
@@ -39,8 +39,7 @@ class NavigationRepository extends Repository {
     {
         $index = 0;
 
-        foreach ($items as $row)
-        {
+        foreach ($items as $row) {
             if (isset($row['id']) === false) {
                 throw new InvalidArgumentException('ID must be set');
             }
@@ -48,8 +47,7 @@ class NavigationRepository extends Repository {
             Navigation::where('id', '=', $row['id'])
                 ->update(array('order_id' => ++$index, 'parent_id' => $parent_id));
 
-            if (isset($row['children']) && $row['children'])
-            {
+            if (isset($row['children']) && $row['children']) {
                 self::updateOrder($row['children'], $row['id']);
             }
         }

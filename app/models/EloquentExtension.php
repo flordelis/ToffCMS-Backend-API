@@ -1,7 +1,7 @@
 <?php
 
-class EloquentExtension extends Eloquent {
-
+class EloquentExtension extends Eloquent
+{
     public static $rules = array(
         'default' => array(),
     );
@@ -10,13 +10,12 @@ class EloquentExtension extends Eloquent {
     {
         $rules = array();
 
-        if (isset(static::$rules['default']) ) {
+        if (isset(static::$rules['default'])) {
             $rules = static::$rules['default'];
         }
 
         // Marge in the specific rules
-        if ($key !== null && isset(static::$rules[$key]))
-        {
+        if ($key !== null && isset(static::$rules[$key])) {
             $rules = array_merge($rules, static::$rules[$key]);
         }
 

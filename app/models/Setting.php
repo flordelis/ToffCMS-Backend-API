@@ -1,7 +1,7 @@
 <?php
 
-abstract class Setting extends Eloquent {
-
+abstract class Setting extends Eloquent
+{
     protected $table = 'settings';
 
     public function getIdAttribute($value)
@@ -22,5 +22,4 @@ abstract class Setting extends Eloquent {
 
         return explode('|', $value);
     }
-
 }

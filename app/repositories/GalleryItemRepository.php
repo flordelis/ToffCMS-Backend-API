@@ -1,8 +1,8 @@
 <?php
 
-class GalleryItemRepository extends Repository {
-
-    protected static $model = 'Gallery_Item';
+class GalleryItemRepository extends Repository
+{
+    protected static $model = 'GalleryItem';
 
     /**
      * Update the item order
@@ -13,9 +13,8 @@ class GalleryItemRepository extends Repository {
     {
         $index = 0;
 
-        foreach ($items as $row)
-        {
-            Gallery_Item::where('id', '=', $row['id'])
+        foreach ($items as $row) {
+            GalleryItem::where('id', '=', $row['id'])
                         ->update(array('order_id' => ++$index));
         }
 
@@ -60,17 +59,15 @@ class GalleryItemRepository extends Repository {
 
     public function delete($id)
     {
-        $item = Gallery_Item::findOrFail($id);
+        $item = GalleryItem::findOrFail($id);
 
         // In case this is an image - delete cache
-        if ($item->type === 'image')
-        {
+        if ($item->type === 'image') {
             // Delete the main image
             File::delete(Config::get('assets.images.paths.input') . $item->content);
 
             // Delete resized images
-            foreach (Config::get('assets.images.sizes') as $size => $data)
-            {
+            foreach (Config::get('assets.images.sizes') as $size => $data) {
                 File::delete(Config::get('assets.images.paths.output') . $size . '_' . $item->content);
             }
         }

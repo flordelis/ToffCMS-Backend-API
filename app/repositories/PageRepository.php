@@ -1,7 +1,7 @@
 <?php
 
-class PageRepository extends Repository {
-
+class PageRepository extends Repository
+{
     protected static $model = 'Page';
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
-class GalleryRepository extends Repository {
-
+class GalleryRepository extends Repository
+{
     protected static $model = 'Gallery';
 
     /**
@@ -11,8 +11,8 @@ class GalleryRepository extends Repository {
     public static function findWithItems()
     {
         return Gallery::with(array('items' => function ($query) {
-                $query->orderBy('order_id');
-            }))->get();
+            $query->orderBy('order_id');
+        }))->get();
     }
 
     /**

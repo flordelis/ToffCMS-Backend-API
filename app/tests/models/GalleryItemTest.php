@@ -15,7 +15,7 @@ class GalleryItemTest extends TestCase {
 
     public function testGallery()
     {
-        $item = Gallery_Item::find(1);
+        $item = GalleryItem::find(1);
         $this->assertSame($item->gallery->id, Gallery::find(1)->id);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-class FrontendSetting extends \Setting {
-
+class FrontendSetting extends \Setting
+{
     protected $visible = array('key', 'value');
-
 }

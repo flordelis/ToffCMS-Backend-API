@@ -1,7 +1,7 @@
 <?php
 
-class Navigation extends EloquentExtension {
-
+class Navigation extends EloquentExtension
+{
     protected $table = 'navigation';
     protected $hidden = array('order_id', 'created_at', 'updated_at', 'page', 'parent_id');
     protected $appends = array('full_url');
@@ -72,5 +72,4 @@ class Navigation extends EloquentExtension {
                 throw new Exception("Error Processing Request");
         }
     }
-
 }

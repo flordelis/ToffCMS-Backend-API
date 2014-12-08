@@ -1,7 +1,7 @@
 <?php
 
-class UserRepository extends Repository {
-
+class UserRepository extends Repository
+{
     protected static $model = 'User';
 
     public function findByEmail($email)

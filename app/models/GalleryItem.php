@@ -1,8 +1,8 @@
 <?php
 
-class Gallery_Item extends EloquentExtension {
-
-    protected $table = 'gallery_items';
+class GalleryItem extends EloquentExtension
+{
+    protected $table = 'GalleryItems';
     protected $hidden = array('created_at', 'updated_at', 'gallery_id');
     public static $rules = array(
         'file' => array(
@@ -24,5 +24,4 @@ class Gallery_Item extends EloquentExtension {
     {
         return (int) $value;
     }
-
 }
