@@ -1,7 +1,7 @@
 <?php
 
-class GalleryItemControllerTest extends TestCase {
-
+class GalleryItemControllerTest extends TestCase
+{
     /**
      * Set the seeds
      */
@@ -25,11 +25,11 @@ class GalleryItemControllerTest extends TestCase {
 
     public function testUploadSuccess()
     {
-        $fp = fopen("app/tests/1x1.gif","w");
-        fwrite($fp,"GIF89a\x01\x00\x01\x00\x80\x00\x00\xFF\xFF",15);
-        fwrite($fp,"\xFF\x00\x00\x00\x21\xF9\x04\x01\x00\x00\x00\x00",12);
-        fwrite($fp,"\x2C\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02",12);
-        fwrite($fp,"\x44\x01\x00\x3B",4);
+        $fp = fopen("app/tests/1x1.gif", "w");
+        fwrite($fp, "GIF89a\x01\x00\x01\x00\x80\x00\x00\xFF\xFF", 15);
+        fwrite($fp, "\xFF\x00\x00\x00\x21\xF9\x04\x01\x00\x00\x00\x00", 12);
+        fwrite($fp, "\x2C\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02", 12);
+        fwrite($fp, "\x44\x01\x00\x3B", 4);
         fclose($fp);
 
         $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(
@@ -50,6 +50,10 @@ class GalleryItemControllerTest extends TestCase {
         $img = imagecreate(1, 1);
         imagecolorallocate($img, 0, 0, 255);
         imagepng($img, Config::get('assets.images.paths.input') . 'test.png');
+
+        if (!File::isDirectory(Config::get('assets.images.paths.output'))) {
+            File::makeDirectory(Config::get('assets.images.paths.output'));
+        }
 
         $img = imagecreate(1, 1);
         imagecolorallocate($img, 0, 0, 255);
