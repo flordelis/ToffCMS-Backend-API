@@ -1,6 +1,7 @@
 <?php
 
-class GalleryItemTest extends TestCase {
+class GalleryItemTest extends TestCase
+{
 
     /**
      * Set the seeds

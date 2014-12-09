@@ -1,6 +1,7 @@
 <?php
 
-class GalleryControllerTest extends TestCase {
+class GalleryControllerTest extends TestCase
+{
 
     /**
      * Set the seeds
@@ -36,10 +37,14 @@ class GalleryControllerTest extends TestCase {
 
     public function testStoreSuccess()
     {
-        $this->call('POST', 'v1.0/gallery', array(
+        $this->call(
+            'POST',
+            'v1.0/gallery',
+            array(
             'title' => 'My World',
             'slug' => 'my-world',
-        ));
+            )
+        );
         $this->assertResponseOk();
     }
 
@@ -48,17 +53,25 @@ class GalleryControllerTest extends TestCase {
      */
     public function testStoreFail()
     {
-        $this->call('POST', 'v1.0/gallery', array(
+        $this->call(
+            'POST',
+            'v1.0/gallery',
+            array(
             'slug' => 'my-world-two',
-        ));
+            )
+        );
     }
 
     public function testUpdateSuccess()
     {
-        $this->call('PATCH', 'v1.0/gallery/1', array(
+        $this->call(
+            'PATCH',
+            'v1.0/gallery/1',
+            array(
             'title' => 'Hello World',
             'slug' => 'hello-world',
-        ));
+            )
+        );
         $this->assertResponseOk();
     }
 
@@ -67,9 +80,13 @@ class GalleryControllerTest extends TestCase {
      */
     public function testUpdateFailValidation()
     {
-        $this->call('PATCH', 'v1.0/gallery/1', array(
+        $this->call(
+            'PATCH',
+            'v1.0/gallery/1',
+            array(
             'title' => 'Hello World',
-        ));
+            )
+        );
     }
 
     /**

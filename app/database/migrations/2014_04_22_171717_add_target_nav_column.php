@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTargetNavColumn extends Migration {
+class AddTargetNavColumn extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,10 +13,13 @@ class AddTargetNavColumn extends Migration {
      */
     public function up()
     {
-        Schema::table('navigation', function(Blueprint $table)
-        {
-            $table->enum('target', array('_blank'))->nullable();
-        });
+        Schema::table(
+            'navigation',
+            function(Blueprint $table)
+            {
+                $table->enum('target', array('_blank'))->nullable();
+            }
+        );
     }
 
     /**
@@ -25,10 +29,12 @@ class AddTargetNavColumn extends Migration {
      */
     public function down()
     {
-        Schema::table('navigation', function (Blueprint $table)
-        {
-            $table->dropColumn('target');
-        });
+        Schema::table(
+            'navigation',
+            function (Blueprint $table)
+            {
+                $table->dropColumn('target');
+            }
+        );
     }
-
 }

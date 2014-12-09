@@ -17,7 +17,7 @@ abstract class Repository
     /**
      * Update a page.
      * @param  integer $id
-     * @param  array $input
+     * @param  array   $input
      * @return Object
      */
     public function update($id, array $input)

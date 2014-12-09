@@ -1,6 +1,7 @@
 <?php
 
-class LoginControllerTest extends TestCase {
+class LoginControllerTest extends TestCase
+{
 
     /**
      * Set the seeds
@@ -15,10 +16,14 @@ class LoginControllerTest extends TestCase {
 
     public function testGetApiKeySuccess()
     {
-        $this->call('POST', 'v1.0/login', array(
+        $this->call(
+            'POST',
+            'v1.0/login',
+            array(
             'email' => 'mja@mja.lv',
             'password' => 'password',
-        ));
+            )
+        );
         $this->assertResponseOk();
     }
 
@@ -27,10 +32,13 @@ class LoginControllerTest extends TestCase {
      */
     public function testGetApiKeyFail()
     {
-        $this->call('POST', 'v1.0/login', array(
+        $this->call(
+            'POST',
+            'v1.0/login',
+            array(
             'email' => 'mja@mja.lv',
             'password' => 'wrong password',
-        ));
+            )
+        );
     }
-
 }

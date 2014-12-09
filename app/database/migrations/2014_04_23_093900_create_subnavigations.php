@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubnavigations extends Migration {
+class CreateSubnavigations extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,10 +13,13 @@ class CreateSubnavigations extends Migration {
      */
     public function up()
     {
-        Schema::table('navigation', function (Blueprint $table)
-        {
-            $table->integer('parent_id')->nullable();
-        });
+        Schema::table(
+            'navigation',
+            function (Blueprint $table)
+            {
+                $table->integer('parent_id')->nullable();
+            }
+        );
     }
 
     /**
@@ -25,10 +29,12 @@ class CreateSubnavigations extends Migration {
      */
     public function down()
     {
-        Schema::table('navigation', function (Blueprint $table)
-        {
-            $table->dropColumn('parent_id');
-        });
+        Schema::table(
+            'navigation',
+            function (Blueprint $table)
+            {
+                $table->dropColumn('parent_id');
+            }
+        );
     }
-
 }

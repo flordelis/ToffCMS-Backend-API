@@ -1,6 +1,7 @@
 <?php
 
-class PageControllerTest extends TestCase {
+class PageControllerTest extends TestCase
+{
 
     /**
      * Set the seeds
@@ -29,11 +30,15 @@ class PageControllerTest extends TestCase {
     public function testStoreSuccess()
     {
         $this->be(User::find(1));
-        $this->call('POST', 'v1.0/page', array(
+        $this->call(
+            'POST',
+            'v1.0/page',
+            array(
             'title' => 'Hello World',
             'slug' => 'hello-world',
             'body' => 'Lorem ipsum dolor sit amet',
-        ));
+            )
+        );
         $this->assertResponseOk();
     }
 
@@ -45,21 +50,29 @@ class PageControllerTest extends TestCase {
      */
     public function testStoreFail()
     {
-        $this->call('POST', 'v1.0/page', array(
+        $this->call(
+            'POST',
+            'v1.0/page',
+            array(
             'title' => 'Hello World',
             'body' => 'Lorem ipsum dolor sit amet',
-        ));
+            )
+        );
     }
 
     public function testUpdateSuccess()
     {
-        $this->call('PATCH', 'v1.0/page/1', array(
+        $this->call(
+            'PATCH',
+            'v1.0/page/1',
+            array(
             'title' => 'Hello World',
             'slug' => 'hello-world',
             'body' => 'Lorem ipsum dolor sit amet',
             'status' => 'live',
             'language' => 'en',
-        ));
+            )
+        );
         $this->assertResponseOk();
     }
 
@@ -68,12 +81,16 @@ class PageControllerTest extends TestCase {
      */
     public function testUpdateFailValidation()
     {
-        $this->call('PATCH', 'v1.0/page/1', array(
+        $this->call(
+            'PATCH',
+            'v1.0/page/1',
+            array(
             'title' => 'Hello World',
             'body' => 'Lorem ipsum dolor sit amet',
             'status' => 'live',
             'language' => 'en',
-        ));
+            )
+        );
     }
 
     /**

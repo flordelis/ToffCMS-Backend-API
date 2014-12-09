@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OrderIdForGalleryItems extends Migration {
+class OrderIdForGalleryItems extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,10 +13,13 @@ class OrderIdForGalleryItems extends Migration {
      */
     public function up()
     {
-        Schema::table('GalleryItems', function(Blueprint $table)
-        {
-            $table->integer('order_id')->nullable();
-        });
+        Schema::table(
+            'GalleryItems',
+            function(Blueprint $table)
+            {
+                $table->integer('order_id')->nullable();
+            }
+        );
     }
 
     /**
@@ -25,10 +29,12 @@ class OrderIdForGalleryItems extends Migration {
      */
     public function down()
     {
-        Schema::table('GalleryItems', function(Blueprint $table)
-        {
-            $table->dropColumn('order_id');
-        });
+        Schema::table(
+            'GalleryItems',
+            function(Blueprint $table)
+            {
+                $table->dropColumn('order_id');
+            }
+        );
     }
-
 }

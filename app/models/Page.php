@@ -35,7 +35,7 @@ class Page extends EloquentExtension
     public function author()
     {
         return $this->hasOne('User', 'id', 'author_id')
-                    ->select('id', 'email');
+            ->select('id', 'email');
     }
 
     public function getAuthorIdAttribute($value)

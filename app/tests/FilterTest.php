@@ -18,10 +18,14 @@ class FilterTest extends TestCase
         Route::enableFilters();
         $user = User::find(1);
 
-        $this->call('GET', 'v1.0/user/1', array(
+        $this->call(
+            'GET',
+            'v1.0/user/1',
+            array(
             'api_key' => $user->api_key,
             'user_id' => $user->id,
-        ));
+            )
+        );
 
         $this->assertResponseOk();
     }

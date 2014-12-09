@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FixPageTableUniqueProblem extends Migration {
+class FixPageTableUniqueProblem extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,11 +13,14 @@ class FixPageTableUniqueProblem extends Migration {
      */
     public function up()
     {
-        Schema::table('pages', function(Blueprint $table)
-        {
-            $table->dropUnique('pages_slug_unique');
-            $table->unique(array('slug', 'language'));
-        });
+        Schema::table(
+            'pages',
+            function(Blueprint $table)
+            {
+                $table->dropUnique('pages_slug_unique');
+                $table->unique(array('slug', 'language'));
+            }
+        );
     }
 
     /**
@@ -26,11 +30,13 @@ class FixPageTableUniqueProblem extends Migration {
      */
     public function down()
     {
-        Schema::table('pages', function(Blueprint $table)
-        {
-            $table->dropUnique('pages_slug_language_unique');
-            $table->unique('slug');
-        });
+        Schema::table(
+            'pages',
+            function(Blueprint $table)
+            {
+                $table->dropUnique('pages_slug_language_unique');
+                $table->unique('slug');
+            }
+        );
     }
-
 }

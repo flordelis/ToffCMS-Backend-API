@@ -12,7 +12,7 @@ class ValidationException extends Exception
     /**
      * Create a new validate exception instance.
      *
-     * @param  Laravel\Validator|Laravel\Messages  $container
+     * @param  Laravel\Validator|Laravel\Messages $container
      * @return void
      */
     public function __construct($container)

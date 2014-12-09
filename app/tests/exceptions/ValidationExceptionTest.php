@@ -1,6 +1,7 @@
 <?php
 
-class ValidationExceptionTest extends TestCase {
+class ValidationExceptionTest extends TestCase
+{
 
     public function testException()
     {
@@ -11,5 +12,4 @@ class ValidationExceptionTest extends TestCase {
             $this->assertTrue(is_array($e->allMessages()));
         }
     }
-
 }

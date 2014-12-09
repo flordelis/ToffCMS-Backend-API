@@ -4,7 +4,6 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
     /**
      * Default preparation for each test
-     *
      */
     public function setUp()
     {
@@ -23,13 +22,12 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
 
         $testEnvironment = 'testing';
 
-        return require __DIR__.'/../../bootstrap/start.php';
+        return include __DIR__.'/../../bootstrap/start.php';
     }
 
     /**
      * Migrates the database and set the mailer to 'pretend'.
      * This will cause the tests to run quickly.
-     *
      */
     private function prepareForTests()
     {

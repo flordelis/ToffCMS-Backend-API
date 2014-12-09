@@ -2,7 +2,8 @@
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ImageControllerTest extends TestCase {
+class ImageControllerTest extends TestCase
+{
 
     protected static $filename = 'example.png';
     protected static $path = 'app/tests/';
@@ -60,5 +61,4 @@ class ImageControllerTest extends TestCase {
         // Delete the image
         unlink(Config::get('assets.images.paths.output') . 'small_' . static::$filename);
     }
-
 }

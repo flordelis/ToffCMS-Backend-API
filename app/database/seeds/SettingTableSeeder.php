@@ -6,20 +6,24 @@ class SettingTableSeeder extends Seeder
     {
         DB::table('settings')->delete();
 
-        BackendSetting::create(array(
+        BackendSetting::create(
+            array(
             'name' => 'Site name',
             'key' => 'siteName',
             'default' => 'My Website',
             'is_public' => 'Y'
-        ));
+            )
+        );
 
-        BackendSetting::create(array(
+        BackendSetting::create(
+            array(
             'name' => 'Default Language',
             'key' => 'defaultLanguage',
             'default' => 'en',
             'available_values' => 'en|lv|ru',
             'is_public' => 'Y'
-        ));
+            )
+        );
 
     }
 }

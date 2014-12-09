@@ -1,6 +1,7 @@
 <?php
 
-class SettingControllerTest extends TestCase {
+class SettingControllerTest extends TestCase
+{
 
     /**
      * Set the seeds
@@ -24,5 +25,4 @@ class SettingControllerTest extends TestCase {
         $this->call('GET', 'v1.0/settings/frontend');
         $this->assertResponseOk();
     }
-
 }

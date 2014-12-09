@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNavigationTable extends Migration {
+class CreateNavigationTable extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,18 +13,21 @@ class CreateNavigationTable extends Migration {
      */
     public function up()
     {
-        Schema::create('navigation', function(Blueprint $table)
-        {
-            $table->increments('id');
-            $table->string('title');
-            $table->enum('type', array('page', 'website', 'uri'));
-            $table->string('uri')->nullable();
-            $table->string('url')->nullable();
-            $table->integer('page_id')->nullable();
-            $table->integer('order_id')->nullable();
-            $table->enum('language', array('lv', 'en', 'ru'));
-            $table->timestamps();
-        });
+        Schema::create(
+            'navigation',
+            function(Blueprint $table)
+            {
+                $table->increments('id');
+                $table->string('title');
+                $table->enum('type', array('page', 'website', 'uri'));
+                $table->string('uri')->nullable();
+                $table->string('url')->nullable();
+                $table->integer('page_id')->nullable();
+                $table->integer('order_id')->nullable();
+                $table->enum('language', array('lv', 'en', 'ru'));
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -35,5 +39,4 @@ class CreateNavigationTable extends Migration {
     {
         Schema::drop('navigation');
     }
-
 }

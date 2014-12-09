@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTable extends Migration {
+class CreatePagesTable extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,17 +13,20 @@ class CreatePagesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('pages', function(Blueprint $table)
-        {
-            $table->increments('id');
-            $table->string('title', 100);
-            $table->string('slug', 100)->unique();
-            $table->text('body');
-            $table->enum('status', array('live', 'draft'))->default('draft');
-            $table->enum('language', array('en', 'lv', 'ru'))->default('en');
-            $table->integer('author_id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'pages',
+            function(Blueprint $table)
+            {
+                $table->increments('id');
+                $table->string('title', 100);
+                $table->string('slug', 100)->unique();
+                $table->text('body');
+                $table->enum('status', array('live', 'draft'))->default('draft');
+                $table->enum('language', array('en', 'lv', 'ru'))->default('en');
+                $table->integer('author_id');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -34,5 +38,4 @@ class CreatePagesTable extends Migration {
     {
         Schema::drop('pages');
     }
-
 }

@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGalleryTable extends Migration {
+class CreateGalleryTable extends Migration
+{
 
     /**
      * Run the migrations.
@@ -12,23 +13,29 @@ class CreateGalleryTable extends Migration {
      */
     public function up()
     {
-        Schema::create('gallery', function(Blueprint $table)
-        {
-            $table->increments('id');
-            $table->string('title', 100);
-            $table->string('slug', 100)->unique();
-            $table->enum('status', array('live', 'draft'))->default('draft');
-            $table->timestamps();
-        });
+        Schema::create(
+            'gallery',
+            function(Blueprint $table)
+            {
+                $table->increments('id');
+                $table->string('title', 100);
+                $table->string('slug', 100)->unique();
+                $table->enum('status', array('live', 'draft'))->default('draft');
+                $table->timestamps();
+            }
+        );
 
-        Schema::create('GalleryItems', function(Blueprint $table)
-        {
-            $table->increments('id');
-            $table->enum('type', array('video', 'image'));
-            $table->string('content', 250);
-            $table->integer('gallery_id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'GalleryItems',
+            function(Blueprint $table)
+            {
+                $table->increments('id');
+                $table->enum('type', array('video', 'image'));
+                $table->string('content', 250);
+                $table->integer('gallery_id');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -41,5 +48,4 @@ class CreateGalleryTable extends Migration {
         Schema::drop('gallery');
         Schema::drop('GalleryItems');
     }
-
 }

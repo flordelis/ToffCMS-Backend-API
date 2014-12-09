@@ -1,6 +1,7 @@
 <?php
 
-class NavigationTest extends TestCase {
+class NavigationTest extends TestCase
+{
 
     /**
      * Set the seeds
@@ -23,20 +24,24 @@ class NavigationTest extends TestCase {
 
     public function testTypeWebsite()
     {
-        $nav = new Navigation(array(
+        $nav = new Navigation(
+            array(
             'type' => 'website',
             'url' => 'http://google.com',
-        ));
+            )
+        );
 
         $this->assertSame($nav->getFullUrlAttribute(), 'http://google.com');
     }
 
     public function testTypeUri()
     {
-        $nav = new Navigation(array(
+        $nav = new Navigation(
+            array(
             'type' => 'uri',
             'uri' => '/gallery/',
-        ));
+            )
+        );
 
         $this->assertSame($nav->getFullUrlAttribute(), '/gallery/');
     }
@@ -44,10 +49,12 @@ class NavigationTest extends TestCase {
     public function testTypePage()
     {
         $page = Page::find(1);
-        $nav = new Navigation(array(
+        $nav = new Navigation(
+            array(
             'type' => 'page',
             'page_id' => $page->id,
-        ));
+            )
+        );
 
         $this->assertSame($nav->getFullUrlAttribute(), '/' . $page->slug);
 
@@ -60,10 +67,11 @@ class NavigationTest extends TestCase {
      */
     public function testTypeFail()
     {
-        $nav = new Navigation(array(
+        $nav = new Navigation(
+            array(
             'type' => 'fail',
-        ));
+            )
+        );
         $nav->getFullUrlAttribute();
     }
-
 }

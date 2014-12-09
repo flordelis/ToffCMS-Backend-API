@@ -30,7 +30,7 @@ class User extends Eloquent implements UserInterface
 
     /**
      * Validate the API key
-     * @param  string $api_key
+     * @param  string  $api_key
      * @param  integer $user_id
      * @return boolean|object
      */

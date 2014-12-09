@@ -10,9 +10,11 @@ class GalleryRepository extends Repository
      */
     public static function findWithItems()
     {
-        return Gallery::with(array('items' => function ($query) {
-            $query->orderBy('order_id');
-        }))->get();
+        return Gallery::with(
+            array('items' => function ($query) {
+                $query->orderBy('order_id');
+            })
+        )->get();
     }
 
     /**
@@ -23,17 +25,19 @@ class GalleryRepository extends Repository
     public function findBySlug($slug)
     {
         return Gallery::where('slug', $slug)
-            ->with(array('items' => function ($query) {
-                $query->orderBy('order_id');
-            }))
-            ->take(1)
-            ->firstOrFail();
+            ->with(
+                array('items' => function ($query) {
+                    $query->orderBy('order_id');
+                })
+            )
+                ->take(1)
+                ->firstOrFail();
     }
 
     /**
      * Update a gallery.
      * @param  integer $id
-     * @param  array $input
+     * @param  array   $input
      * @return Page
      */
     public function update($id, array $input)

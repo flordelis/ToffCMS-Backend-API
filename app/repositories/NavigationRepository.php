@@ -32,7 +32,7 @@ class NavigationRepository extends Repository
 
     /**
      * Update the item order
-     * @param  array  $items
+     * @param  array $items
      * @return boolean
      */
     public static function updateOrder(array $items, $parent_id = 0)

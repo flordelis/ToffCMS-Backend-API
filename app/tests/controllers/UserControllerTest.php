@@ -1,6 +1,7 @@
 <?php
 
-class UserControllerTest extends TestCase {
+class UserControllerTest extends TestCase
+{
 
     /**
      * Set the seeds
@@ -18,5 +19,4 @@ class UserControllerTest extends TestCase {
         $this->call('GET', 'v1.0/user/1');
         $this->assertResponseOk();
     }
-
 }

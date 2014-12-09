@@ -18,9 +18,13 @@ class GalleryItemControllerTest extends TestCase
      */
     public function testUploadFailNotFoundGallery()
     {
-        $this->call('POST', 'v1.0/gallery/item/upload', array(
+        $this->call(
+            'POST',
+            'v1.0/gallery/item/upload',
+            array(
             'id' => 1000,
-        ));
+            )
+        );
     }
 
     public function testUploadSuccess()
@@ -37,11 +41,16 @@ class GalleryItemControllerTest extends TestCase
             '1x1.gif'
         );
 
-        $this->call('POST', 'v1.0/gallery/item/upload', array(
+        $this->call(
+            'POST',
+            'v1.0/gallery/item/upload',
+            array(
             'id' => 1,
-        ), array(
+            ),
+            array(
             'file' => $uploadedFile,
-        ));
+            )
+        );
     }
 
     public function testDestroy()
@@ -60,11 +69,13 @@ class GalleryItemControllerTest extends TestCase
         imagepng($img, Config::get('assets.images.paths.output') . 'small_test.png');
 
         // Create an actual gallery item
-        $item = GalleryItem::create(array(
+        $item = GalleryItem::create(
+            array(
             'type' => 'image',
             'content' => 'test.png',
             'gallery_id' => 1
-        ));
+            )
+        );
 
         // Delete this item
         $this->call('DELETE', 'v1.0/gallery/item/' . $item->id);
@@ -73,13 +84,17 @@ class GalleryItemControllerTest extends TestCase
 
     public function testSaveOrder()
     {
-        $this->call('PUT', 'v1.0/gallery/item/order', array(
+        $this->call(
+            'PUT',
+            'v1.0/gallery/item/order',
+            array(
             'data' => array(
                 array('id' => 3),
                 array('id' => 2),
                 array('id' => 1),
             ),
-        ));
+            )
+        );
         $this->assertResponseOk();
     }
 }

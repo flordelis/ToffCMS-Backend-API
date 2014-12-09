@@ -5,18 +5,20 @@
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Config;
 
-class Image {
+class Image
+{
 
     protected $imagine;
 
     /**
      * We instantiate the Imagine library with Imagick or GD
+     *
      * @codeCoverageIgnore
      */
     public function __construct($library = null)
     {
-        if ( !$this->imagine) {
-            if ( !$library and class_exists('Imagick')) {
+        if (!$this->imagine) {
+            if (!$library and class_exists('Imagick')) {
                 $this->imagine = new \Imagine\Imagick\Imagine();
             } else {
                 $this->imagine = new \Imagine\Gd\Imagine();
@@ -31,7 +33,8 @@ class Image {
      *
      * @return blob image contents.
      */
-    public function resize($filename, $sizeString) {
+    public function resize($filename, $sizeString)
+    {
 
         // We can read the output path from our configuration file.
         $outputDir = Config::get('assets.images.paths.output');
@@ -78,7 +81,8 @@ class Image {
      * @param string $filename
      * @return string mimetype
      */
-    public function getMimeType($filename) {
+    public function getMimeType($filename)
+    {
 
         // Make the input file path.
         $inputDir = Config::get('assets.images.paths.input');
@@ -88,5 +92,4 @@ class Image {
         $file = new \Symfony\Component\HttpFoundation\File\File($inputFile);
         return $file->getMimeType();
     }
-
 }

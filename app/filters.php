@@ -11,14 +11,18 @@
 |
 */
 
-App::before(function($request) {
-    //
-});
+App::before(
+    function($request) {
+        //
+    }
+);
 
 
-App::after(function($request, $response) {
-    //
-});
+App::after(
+    function($request, $response) {
+        //
+    }
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +35,14 @@ App::after(function($request, $response) {
 |
 */
 
-Route::filter('auth.apiKey', function () {
-    if (User::validAPIKey(Input::get('api_key'), Input::get('user_id')) === false) {
-        return App::abort(401);
+Route::filter(
+    'auth.apiKey',
+    function () {
+        if (User::validAPIKey(Input::get('api_key'), Input::get('user_id')) === false) {
+            return App::abort(401);
+        }
     }
-});
+);
 
 /*
 |--------------------------------------------------------------------------

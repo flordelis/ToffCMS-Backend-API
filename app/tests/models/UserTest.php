@@ -1,6 +1,7 @@
 <?php
 
-class UserTest extends TestCase {
+class UserTest extends TestCase
+{
 
     /**
      * Set the seeds
@@ -20,5 +21,4 @@ class UserTest extends TestCase {
         $this->assertFalse(User::validAPIKey('invalid key', $user->id));
         $this->assertTrue(User::validAPIKey($user->api_key, $user->id));
     }
-
 }
