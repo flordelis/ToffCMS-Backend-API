@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSubnavigations extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,8 +14,7 @@ class CreateSubnavigations extends Migration
     {
         Schema::table(
             'navigation',
-            function (Blueprint $table)
-            {
+            function (Blueprint $table) {
                 $table->integer('parent_id')->nullable();
             }
         );
@@ -31,8 +29,7 @@ class CreateSubnavigations extends Migration
     {
         Schema::table(
             'navigation',
-            function (Blueprint $table)
-            {
+            function (Blueprint $table) {
                 $table->dropColumn('parent_id');
             }
         );

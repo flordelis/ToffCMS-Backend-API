@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateNavigationTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,8 +14,7 @@ class CreateNavigationTable extends Migration
     {
         Schema::create(
             'navigation',
-            function(Blueprint $table)
-            {
+            function(Blueprint $table) {
                 $table->increments('id');
                 $table->string('title');
                 $table->enum('type', array('page', 'website', 'uri'));

@@ -8,6 +8,9 @@
 		"orchestra/imagine": "2.2.*",
 		"mockery/mockery": "0.9.*"
 	},
+    "require-dev": {
+        "leroy-merlin-br/larasniffer": "dev-master"
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",

@@ -19,8 +19,7 @@ Route::get('developer', 'DeveloperController@index'); // ToDo: temp
 // Route group for API versioning
 Route::group(
     array('prefix' => 'v1.0'),
-    function()
-    {
+    function() {
         Route::get('page/{slug}', 'PageController@show');
         Route::get('gallery/{slug}', 'GalleryController@show');
         Route::get('navigation/{language}', 'NavigationController@show');
@@ -29,8 +28,7 @@ Route::group(
         // Admin routes
         Route::group(
             array('before' => 'auth.apiKey'),
-            function()
-            {
+            function() {
                 // Place admin routes here
                 Route::match(array('PUT'), 'navigation/order', 'NavigationController@saveOrder');
                 Route::match(array('PUT'), 'gallery/item/order', 'GalleryItemController@saveOrder');

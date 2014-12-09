@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class FixPageTableUniqueProblem extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,8 +14,7 @@ class FixPageTableUniqueProblem extends Migration
     {
         Schema::table(
             'pages',
-            function(Blueprint $table)
-            {
+            function(Blueprint $table) {
                 $table->dropUnique('pages_slug_unique');
                 $table->unique(array('slug', 'language'));
             }
@@ -32,8 +30,7 @@ class FixPageTableUniqueProblem extends Migration
     {
         Schema::table(
             'pages',
-            function(Blueprint $table)
-            {
+            function(Blueprint $table) {
                 $table->dropUnique('pages_slug_language_unique');
                 $table->unique('slug');
             }

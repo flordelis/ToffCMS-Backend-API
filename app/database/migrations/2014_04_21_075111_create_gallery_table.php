@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateGalleryTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,8 +14,7 @@ class CreateGalleryTable extends Migration
     {
         Schema::create(
             'gallery',
-            function(Blueprint $table)
-            {
+            function(Blueprint $table) {
                 $table->increments('id');
                 $table->string('title', 100);
                 $table->string('slug', 100)->unique();
@@ -27,8 +25,7 @@ class CreateGalleryTable extends Migration
 
         Schema::create(
             'GalleryItems',
-            function(Blueprint $table)
-            {
+            function(Blueprint $table) {
                 $table->increments('id');
                 $table->enum('type', array('video', 'image'));
                 $table->string('content', 250);

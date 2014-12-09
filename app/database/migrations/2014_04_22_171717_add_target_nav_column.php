@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddTargetNavColumn extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,8 +14,7 @@ class AddTargetNavColumn extends Migration
     {
         Schema::table(
             'navigation',
-            function(Blueprint $table)
-            {
+            function(Blueprint $table) {
                 $table->enum('target', array('_blank'))->nullable();
             }
         );
@@ -31,8 +29,7 @@ class AddTargetNavColumn extends Migration
     {
         Schema::table(
             'navigation',
-            function (Blueprint $table)
-            {
+            function (Blueprint $table) {
                 $table->dropColumn('target');
             }
         );
