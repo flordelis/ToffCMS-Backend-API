@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Gallery item model.
+ */
 class GalleryItem extends EloquentExtension
 {
     protected $table = 'GalleryItems';
@@ -10,16 +13,35 @@ class GalleryItem extends EloquentExtension
         ),
     );
 
+    /**
+     * Get the gallery attached to this item.
+     *
+     * @return Gallery
+     */
     public function gallery()
     {
         return $this->belongsTo('Gallery');
     }
 
+    /**
+     * Get ID attr.
+     *
+     * @param string $value Value from DB.
+     *
+     * @return integer
+     */
     public function getIdAttribute($value)
     {
         return (int) $value;
     }
 
+    /**
+     * Get Gallery ID attr.
+     *
+     * @param string $value Value from DB.
+     *
+     * @return integer
+     */
     public function getGalleryIdAttribute($value)
     {
         return (int) $value;

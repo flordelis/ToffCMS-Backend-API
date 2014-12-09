@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Gallery model.
+ */
 class Gallery extends EloquentExtension
 {
     protected $table = 'gallery';
@@ -14,7 +17,7 @@ class Gallery extends EloquentExtension
 
     /**
      * Grab the rules.
-     * @param  string $key
+     *
      * @return array
      */
     public function getUpdateRules()
@@ -24,19 +27,34 @@ class Gallery extends EloquentExtension
         return $rules;
     }
 
+    /**
+     * Get the gallery items.
+     *
+     * @return [GalleryItem]
+     */
     public function items()
     {
         return $this->hasMany('GalleryItem');
     }
 
+    /**
+     * Get ID attr.
+     *
+     * @param string $value Value from DB.
+     *
+     * @return integer
+     */
     public function getIdAttribute($value)
     {
         return (int) $value;
     }
 
     /**
-     * Delete the gallery and images
-     * @param  integer $id
+     * Delete the gallery and images.
+     *
+     * @param integer $id Primary key.
+     *
+     * @return boolean
      */
     public static function destroy($id)
     {

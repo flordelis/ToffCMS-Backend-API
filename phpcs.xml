@@ -10,6 +10,7 @@
     <rule ref="PEAR">
         <exclude name="PEAR.Commenting.FileComment"/>
         <exclude name="PEAR.Commenting.ClassComment"/>
+        <exclude name="PEAR.WhiteSpace.ScopeIndent"/>
     </rule>
 
     <rule ref="Squiz.Commenting.FunctionComment" />

@@ -1,11 +1,21 @@
 <?php
 
+/**
+ * Eloquent model extension.
+ */
 class EloquentExtension extends Eloquent
 {
     public static $rules = array(
         'default' => array(),
     );
 
+    /**
+     * Get the validation rules of a model.
+     *
+     * @param string $key Array key.
+     *
+     * @return array
+     */
     public static function getRules($key = null)
     {
         $rules = array();
@@ -22,7 +32,16 @@ class EloquentExtension extends Eloquent
         return $rules;
     }
 
-    public static function validateOrFail($input, $type = null)
+    /**
+     * Validate the model of fail.
+     *
+     * @param array  $input Users input.
+     * @param string $type  Validation rule key.
+     *
+     * @throws ValidationException If validation fails.
+     * @return boolean
+     */
+    public static function validateOrFail(array $input, $type = null)
     {
         $validator = Validator::make($input, static::getRules($type));
 

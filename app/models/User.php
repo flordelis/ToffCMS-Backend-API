@@ -3,6 +3,9 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
+/**
+ * User model.
+ */
 class User extends Eloquent implements UserInterface
 {
     use Illuminate\Auth\UserTrait;
@@ -23,15 +26,24 @@ class User extends Eloquent implements UserInterface
      */
     protected $hidden = array('password', 'updated_at');
 
+    /**
+     * Grab the ID attribute.
+     *
+     * @param integer $value ID value.
+     *
+     * @return integer
+     */
     public function getIdAttribute($value)
     {
         return (int) $value;
     }
 
     /**
-     * Validate the API key
-     * @param  string  $api_key
-     * @param  integer $user_id
+     * Validate the API key.
+     *
+     * @param string  $api_key Users API key.
+     * @param integer $user_id Users ID.
+     *
      * @return boolean|object
      */
     public static function validAPIKey($api_key, $user_id)

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Navigation model.
+ */
 class Navigation extends EloquentExtension
 {
     protected $table = 'navigation';
@@ -17,13 +20,19 @@ class Navigation extends EloquentExtension
         ),
     );
 
+    /**
+     * Grab the page.
+     *
+     * @return Page
+     */
     public function page()
     {
         return $this->hasOne('Page', 'id', 'page_id');
     }
 
     /**
-     * Get the children of this navigation instance
+     * Get the children of this navigation instance.
+     *
      * @return array
      */
     public function children()
@@ -31,30 +40,63 @@ class Navigation extends EloquentExtension
         return $this->hasMany('Navigation', 'parent_id', 'id');
     }
 
+    /**
+     * Get ID attr.
+     *
+     * @param string $value Value from DB.
+     *
+     * @return integer
+     */
     public function getIdAttribute($value)
     {
         return (int) $value;
     }
 
+    /**
+     * Get page ID attr.
+     *
+     * @param string $value Value from DB.
+     *
+     * @return integer
+     */
     public function getPageIdAttribute($value)
     {
         return (int) $value;
     }
 
+    /**
+     * Get parent ID attr.
+     *
+     * @param string $value Value from DB.
+     *
+     * @return integer
+     */
     public function getParentIdAttribute($value)
     {
         return (int) $value;
     }
 
+    /**
+     * Get order ID attr.
+     *
+     * @param string $value Value from DB.
+     *
+     * @return integer
+     */
     public function getOrderIdAttribute($value)
     {
         return (int) $value;
     }
 
+    /**
+     * Get the fully formated URL.
+     *
+     * @throws Exception If invalid type attr is set.
+     * @return string
+     */
     public function getFullUrlAttribute()
     {
-        switch ($this->attributes['type'])
-        {
+        switch ($this->attributes['type']) {
             case 'uri':
                 return '/'. ltrim($this->attributes['uri'], '/');
 
