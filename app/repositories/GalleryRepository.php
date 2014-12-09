@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * Gallery repository.
+ */
 class GalleryRepository extends Repository
 {
     protected static $model = 'Gallery';
 
     /**
      * Find galleries with the items.
+     *
      * @return [Gallery]
      */
     public static function findWithItems()
@@ -18,8 +22,10 @@ class GalleryRepository extends Repository
     }
 
     /**
-     * Find the gallery by slug
-     * @param  string $slug
+     * Find the gallery by slug.
+     *
+     * @param string $slug Slug of the row to be retrieved.
+     *
      * @return Gallery
      */
     public function findBySlug($slug)
@@ -36,8 +42,11 @@ class GalleryRepository extends Repository
 
     /**
      * Update a gallery.
-     * @param  integer $id
-     * @param  array   $input
+     *
+     * @param integer $id    Primary key of the row to be updated.
+     * @param array   $input Posted input.
+     *
+     * @throws ValidationException If validation has failed.
      * @return Page
      */
     public function update($id, array $input)

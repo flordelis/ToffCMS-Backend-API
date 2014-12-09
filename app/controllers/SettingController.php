@@ -1,19 +1,13 @@
 <?php
 
 /**
- * Site settings
- *
- * PHP version 5
- *
- * @category API
- * @package  ToffCMS
- * @author   Matiss Janis Aboltins <matiss@mja.lv>
- * @link     http://www.mja.lv/
+ * Site settings.
  */
 class SettingController extends BaseController
 {
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
@@ -24,6 +18,7 @@ class SettingController extends BaseController
 
     /**
      * Display the publicly available settings (frontend settings).
+     *
      * @return Response
      */
     public function frontend()

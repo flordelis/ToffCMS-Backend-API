@@ -7,9 +7,19 @@
 
     <exclude-pattern>*/start/*</exclude-pattern>
 
+    <rule ref="PEAR">
+        <exclude name="PEAR.Commenting.FileComment"/>
+        <exclude name="PEAR.Commenting.ClassComment"/>
+    </rule>
+
+    <rule ref="Squiz.Commenting.FunctionComment" />
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
+    <rule ref="Squiz.Commenting.ClassComment" />
+
     <rule ref="PSR1">
         <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
     </rule>
+
     <rule ref="PSR2">
         <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
         <exclude name="PSR2.Files.EndFileNewline.NoneFound"/>

@@ -12,7 +12,6 @@ return array(
     |
     */
     'standard' => array(
-        'PHPCS',
         'phpcs.xml',
     ),
 

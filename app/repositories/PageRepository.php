@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * Page repository.
+ */
 class PageRepository extends Repository
 {
     protected static $model = 'Page';
 
     /**
      * Get all of the pages w/ author.
+     *
      * @return [Page]
      */
     public function getWithAuthor()
@@ -15,10 +19,11 @@ class PageRepository extends Repository
     }
 
     /**
-     * Grab the pages by slug and language that
-     * are public.
-     * @param  string $slug
-     * @param  string $language
+     * Grab the pages by slug and language that are public.
+     *
+     * @param string $slug     Slug of the page.
+     * @param string $language Language of the page.
+     *
      * @return Page
      */
     public function getForShow($slug, $language = 'en')
@@ -37,10 +42,12 @@ class PageRepository extends Repository
 
     /**
      * Create a new page.
-     * @param  array $input
+     *
+     * @param array $input User input.
+     *
      * @return Page
      */
-    public function create($input)
+    public function create(array $input)
     {
         Page::validateOrFail($input);
 

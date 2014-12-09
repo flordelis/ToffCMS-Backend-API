@@ -1,12 +1,17 @@
 <?php
 
+/**
+ * Gallery item repository.
+ */
 class GalleryItemRepository extends Repository
 {
     protected static $model = 'GalleryItem';
 
     /**
-     * Update the item order
-     * @param  array $items
+     * Update the item order.
+     *
+     * @param array $items Items that will be updated.
+     *
      * @return boolean
      */
     public static function updateOrder(array $items)
@@ -23,11 +28,13 @@ class GalleryItemRepository extends Repository
 
     /**
      * Create a new object.
-     * @param  Gallery $gallery
-     * @param  string  $filename
-     * @return Object
+     *
+     * @param Gallery $gallery  Gallery.
+     * @param string  $filename Filename.
+     *
+     * @return Class
      */
-    public function createWithUpload($gallery, $filename)
+    public function createWithUpload(Gallery $gallery, $filename)
     {
         $input = array(
             'gallery_id' => $gallery->id,
@@ -39,8 +46,10 @@ class GalleryItemRepository extends Repository
     }
 
     /**
-     * Upload a file
-     * @param Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * Upload a file.
+     *
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file File to be updated.
+     *
      * @return string
      */
     public function upload(\Symfony\Component\HttpFoundation\File\UploadedFile $file)
@@ -57,6 +66,13 @@ class GalleryItemRepository extends Repository
         return $filename;
     }
 
+    /**
+     * Delete a gallery item.
+     *
+     * @param integer $id Primary key.
+     *
+     * @return boolean
+     */
     public function delete($id)
     {
         $item = GalleryItem::findOrFail($id);

@@ -1,22 +1,16 @@
 <?php
 
 /**
- * Gallery management
- *
- * PHP version 5
- *
- * @category API
- * @package  ToffCMS
- * @author   Matiss Janis Aboltins <matiss@mja.lv>
- * @link     http://www.mja.lv/
+ * Gallery management.
  */
 class GalleryController extends BaseController
 {
     protected $gallery;
 
     /**
-     * Constructor
-     * @param GalleryRepository $gallery Gallery repository
+     * Constructor.
+     *
+     * @param GalleryRepository $gallery Gallery repository.
      */
     public function __construct(GalleryRepository $gallery)
     {
@@ -25,6 +19,7 @@ class GalleryController extends BaseController
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
@@ -36,6 +31,7 @@ class GalleryController extends BaseController
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Response
      */
     public function store()
@@ -47,7 +43,9 @@ class GalleryController extends BaseController
 
     /**
      * Display the specified resource.
-     * @param  string $slug Slug of the gallery
+     *
+     * @param string $slug Slug of the gallery.
+     *
      * @return Response
      */
     public function show($slug)
@@ -59,7 +57,9 @@ class GalleryController extends BaseController
 
     /**
      * Update the specified resource in storage.
-     * @param  int $id Primary key of a gallery
+     *
+     * @param integer $id Primary key of a gallery.
+     *
      * @return Response
      */
     public function update($id)
@@ -71,7 +71,9 @@ class GalleryController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     * @param  int $id Primary key of a gallery
+     *
+     * @param integer $id Primary key of a gallery.
+     *
      * @return Response
      */
     public function destroy($id)

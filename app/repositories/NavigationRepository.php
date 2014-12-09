@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * Navigation repository.
+ */
 class NavigationRepository extends Repository
 {
     protected static $model = 'Navigation';
 
     /**
-     * Find the first navigation level
+     * Find the first navigation level.
+     *
      * @return [Navigation]
      */
     public static function findFirstLevel()
@@ -17,8 +21,10 @@ class NavigationRepository extends Repository
     }
 
     /**
-     * Find navigation instances by language
-     * @param  string $language
+     * Find navigation instances by language.
+     *
+     * @param string $language Language of the nav instances to be retrieved.
+     *
      * @return [Navigation]
      */
     public static function findByLanguage($language)
@@ -31,8 +37,12 @@ class NavigationRepository extends Repository
     }
 
     /**
-     * Update the item order
-     * @param  array $items
+     * Update the item order.
+     *
+     * @param array   $items     Items that will be updated.
+     * @param integer $parent_id Parent ID.
+     *
+     * @throws InvalidArgumentException If ID of an item is not set.
      * @return boolean
      */
     public static function updateOrder(array $items, $parent_id = 0)

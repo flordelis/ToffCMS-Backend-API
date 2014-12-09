@@ -1,12 +1,17 @@
 <?php
 
+/**
+ * Abstract repository class.
+ */
 abstract class Repository
 {
     protected static $model;
 
     /**
      * Find or fail the model.
-     * @param  integer $id
+     *
+     * @param integer $id Primary key of the row to be found.
+     *
      * @return Objcet
      */
     public static function findOrFail($id)
@@ -15,38 +20,44 @@ abstract class Repository
     }
 
     /**
-     * Update a page.
-     * @param  integer $id
-     * @param  array   $input
-     * @return Object
+     * Update a resource.
+     *
+     * @param integer $id    Primary key of the row to be updated.
+     * @param array   $input Input.
+     *
+     * @return Class
      */
     public function update($id, array $input)
     {
-        $page = static::findOrFail($id);
+        $model = static::findOrFail($id);
         static::getModel()->validateOrFail($input, 'update');
 
-        $page->save($input);
-        return $page;
+        $model->save($input);
+        return $model;
     }
 
     /**
-     * Create a new page.
-     * @param  array $input
-     * @return Object
+     * Create a new model.
+     *
+     * @param array $input Input with which the row will be created.
+     *
+     * @return Class
      */
-    public function create($input)
+    public function create(array $input)
     {
         static::getModel()->validateOrFail($input);
 
-        $page = static::getModel($input);
-        $page->save();
+        $model = static::getModel($input);
+        $model->save();
 
-        return $page;
+        return $model;
     }
 
     /**
-     * Delete the page
-     * @param  integer $id
+     * Delete the page.
+     *
+     * @param integer $id Primary key.
+     *
      * @return boolean
      */
     public function delete($id)
@@ -55,8 +66,10 @@ abstract class Repository
     }
 
     /**
-     * Get the model
-     * @param  mixed $params
+     * Get the model.
+     *
+     * @param array $params Params that will be passed to the model constructor.
+     *
      * @return object
      */
     public static function getModel(array $params = array())

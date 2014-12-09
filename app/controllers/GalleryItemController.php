@@ -1,14 +1,7 @@
 <?php
 
 /**
- * Gallery item API
- *
- * PHP version 5
- *
- * @category API
- * @package  ToffCMS
- * @author   Matiss Janis Aboltins <matiss@mja.lv>
- * @link     http://www.mja.lv/
+ * Gallery item API.
  */
 class GalleryItemController extends BaseController
 {
@@ -16,9 +9,10 @@ class GalleryItemController extends BaseController
     protected $gallery;
 
     /**
-     * Constructor
-     * @param GalleryItemRepository $item    Gallery item repository
-     * @param GalleryRepository     $gallery Gallery repository
+     * Constructor.
+     *
+     * @param GalleryItemRepository $item    Gallery item repository.
+     * @param GalleryRepository     $gallery Gallery repository.
      */
     public function __construct(
         GalleryItemRepository $item,
@@ -29,7 +23,7 @@ class GalleryItemController extends BaseController
     }
 
     /**
-     * Upload an image
+     * Upload an image.
      *
      * @return Response
      */
@@ -46,7 +40,9 @@ class GalleryItemController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     * @param  int $id Gallery item id
+     *
+     * @param integer $id Gallery item id.
+     *
      * @return Response
      */
     public function destroy($id)
@@ -56,7 +52,8 @@ class GalleryItemController extends BaseController
     }
 
     /**
-     * Save the order
+     * Save the order.
+     *
      * @return Response
      */
     public function saveOrder()
