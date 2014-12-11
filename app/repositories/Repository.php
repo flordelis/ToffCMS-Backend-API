@@ -5,7 +5,7 @@
  */
 abstract class Repository
 {
-    protected static $model;
+    protected $model;
 
     /**
      * Find or fail the model.
@@ -14,9 +14,9 @@ abstract class Repository
      *
      * @return Objcet
      */
-    public static function findOrFail($id)
+    public function findOrFail($id)
     {
-        return static::getModel()->findOrFail($id);
+        return $this->getModel()->findOrFail($id);
     }
 
     /**
@@ -29,8 +29,8 @@ abstract class Repository
      */
     public function update($id, array $input)
     {
-        $model = static::findOrFail($id);
-        static::getModel()->validateOrFail($input, 'update');
+        $model = $this->findOrFail($id);
+        $this->getModel()->validateOrFail($input, 'update');
 
         $model->save($input);
         return $model;
@@ -45,9 +45,9 @@ abstract class Repository
      */
     public function create(array $input)
     {
-        static::getModel()->validateOrFail($input);
+        $this->getModel()->validateOrFail($input);
 
-        $model = static::getModel($input);
+        $model = $this->getModel($input);
         $model->save();
 
         return $model;
@@ -62,7 +62,7 @@ abstract class Repository
      */
     public function delete($id)
     {
-        return static::getModel()->destroy($id);
+        return $this->getModel()->destroy($id);
     }
 
     /**
@@ -72,9 +72,8 @@ abstract class Repository
      *
      * @return object
      */
-    public static function getModel(array $params = array())
+    public function getModel(array $params = array())
     {
-        $model = static::$model;
-        return new $model($params);
+        return $this->model->fill($params);
     }
 }

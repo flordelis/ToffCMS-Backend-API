@@ -5,7 +5,15 @@
  */
 class GalleryItemRepository extends Repository
 {
-    protected static $model = 'GalleryItem';
+    /**
+     * Constructor.
+     *
+     * @param GalleryItem $model GalleryItem model.
+     */
+    public function __construct(GalleryItem $model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * Update the item order.
@@ -14,13 +22,14 @@ class GalleryItemRepository extends Repository
      *
      * @return boolean
      */
-    public static function updateOrder(array $items)
+    public function updateOrder(array $items)
     {
         $index = 0;
 
         foreach ($items as $row) {
-            GalleryItem::where('id', '=', $row['id'])
-                        ->update(array('order_id' => ++$index));
+            $this->getModel()
+                ->where('id', '=', $row['id'])
+                ->update(array('order_id' => ++$index));
         }
 
         return true;
@@ -54,7 +63,7 @@ class GalleryItemRepository extends Repository
      */
     public function upload(\Symfony\Component\HttpFoundation\File\UploadedFile $file)
     {
-        static::getModel()->validateOrFail(array('file' => $file), 'file');
+        $this->getModel()->validateOrFail(array('file' => $file), 'file');
 
         $filename = str_random(8) . '.' . $file->guessExtension();
 
@@ -75,7 +84,7 @@ class GalleryItemRepository extends Repository
      */
     public function delete($id)
     {
-        $item = GalleryItem::findOrFail($id);
+        $item = $this->getModel()->findOrFail($id);
 
         // In case this is an image - delete cache
         if ($item->type === 'image') {

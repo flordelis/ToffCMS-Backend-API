@@ -24,7 +24,7 @@ class CreateGalleryTable extends Migration
         );
 
         Schema::create(
-            'GalleryItems',
+            'gallery_items',
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->enum('type', array('video', 'image'));
@@ -43,6 +43,6 @@ class CreateGalleryTable extends Migration
     public function down()
     {
         Schema::drop('gallery');
-        Schema::drop('GalleryItems');
+        Schema::drop('gallery_items');
     }
 }

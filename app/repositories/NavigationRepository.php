@@ -5,16 +5,25 @@
  */
 class NavigationRepository extends Repository
 {
-    protected static $model = 'Navigation';
+    /**
+     * Constructor.
+     *
+     * @param Navigation $model Navigation model.
+     */
+    public function __construct(Navigation $model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * Find the first navigation level.
      *
      * @return [Navigation]
      */
-    public static function findFirstLevel()
+    public function findFirstLevel()
     {
-        return Navigation::where('parent_id', null)
+        return $this->getModel()
+            ->where('parent_id', null)
             ->with('children')
             ->orderBy('order_id')
             ->get();
@@ -27,9 +36,10 @@ class NavigationRepository extends Repository
      *
      * @return [Navigation]
      */
-    public static function findByLanguage($language)
+    public function findByLanguage($language)
     {
-        return Navigation::where('language', $language)
+        return $this->getModel()
+            ->where('language', $language)
             ->where('parent_id', null)
             ->with('children')
             ->orderBy('order_id')
@@ -45,7 +55,7 @@ class NavigationRepository extends Repository
      * @throws InvalidArgumentException If ID of an item is not set.
      * @return boolean
      */
-    public static function updateOrder(array $items, $parent_id = 0)
+    public function updateOrder(array $items, $parent_id = 0)
     {
         $index = 0;
 
@@ -54,7 +64,8 @@ class NavigationRepository extends Repository
                 throw new InvalidArgumentException('ID must be set');
             }
 
-            Navigation::where('id', '=', $row['id'])
+            $this->getModel()
+                ->where('id', '=', $row['id'])
                 ->update(array('order_id' => ++$index, 'parent_id' => $parent_id));
 
             if (isset($row['children']) && $row['children']) {

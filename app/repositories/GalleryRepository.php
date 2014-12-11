@@ -5,20 +5,29 @@
  */
 class GalleryRepository extends Repository
 {
-    protected static $model = 'Gallery';
+    /**
+     * Constructor.
+     *
+     * @param Gallery $model Gallery model.
+     */
+    public function __construct(Gallery $model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * Find galleries with the items.
      *
      * @return [Gallery]
      */
-    public static function findWithItems()
+    public function findWithItems()
     {
-        return Gallery::with(
-            array('items' => function ($query) {
-                $query->orderBy('order_id');
-            })
-        )->get();
+        return $this->getModel()
+            ->with(
+                array('items' => function ($query) {
+                    $query->orderBy('order_id');
+                })
+            )->get();
     }
 
     /**
@@ -30,14 +39,15 @@ class GalleryRepository extends Repository
      */
     public function findBySlug($slug)
     {
-        return Gallery::where('slug', $slug)
+        return $this->getModel()
+            ->where('slug', $slug)
             ->with(
                 array('items' => function ($query) {
                     $query->orderBy('order_id');
                 })
             )
-                ->take(1)
-                ->firstOrFail();
+            ->take(1)
+            ->firstOrFail();
     }
 
     /**
@@ -51,7 +61,7 @@ class GalleryRepository extends Repository
      */
     public function update($id, array $input)
     {
-        $gallery = static::getModel()->findOrFail($id);
+        $gallery = $this->getModel()->findOrFail($id);
 
         $validator = Validator::make($input, $gallery->getUpdateRules());
         if ($validator->fails()) {

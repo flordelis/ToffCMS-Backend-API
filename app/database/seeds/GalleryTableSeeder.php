@@ -5,7 +5,7 @@ class GalleryTableSeeder extends Seeder
     public function run()
     {
         DB::table('gallery')->delete();
-        DB::table('GalleryItems')->delete();
+        DB::table('gallery_items')->delete();
 
         Gallery::create(
             array(

@@ -5,7 +5,7 @@
  */
 class GalleryItem extends EloquentExtension
 {
-    protected $table = 'GalleryItems';
+    protected $table = 'gallery_items';
     protected $hidden = array('created_at', 'updated_at', 'gallery_id');
     public static $rules = array(
         'file' => array(

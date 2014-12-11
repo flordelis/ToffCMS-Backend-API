@@ -5,7 +5,15 @@
  */
 class PageRepository extends Repository
 {
-    protected static $model = 'Page';
+    /**
+     * Constructor.
+     *
+     * @param Page $model Page model.
+     */
+    public function __construct(Page $model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * Get all of the pages w/ author.
@@ -14,7 +22,8 @@ class PageRepository extends Repository
      */
     public function getWithAuthor()
     {
-        return Page::with('author')
+        return $this->getModel()
+            ->with('author')
             ->get();
     }
 
@@ -32,7 +41,8 @@ class PageRepository extends Repository
             $language = 'en';
         }
 
-        return Page::where('slug', $slug)
+        return $this->getModel()
+            ->where('slug', $slug)
             ->where('status', 'live')
             ->where('language', $language)
             ->with('author')
@@ -49,9 +59,9 @@ class PageRepository extends Repository
      */
     public function create(array $input)
     {
-        Page::validateOrFail($input);
+        $this->getModel()->validateOrFail($input);
 
-        $page = new Page($input);
+        $page = $this->getModel($input);
         $page->author_id = Auth::user()->id;
         $page->save();
 

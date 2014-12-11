@@ -5,7 +5,15 @@
  */
 class UserRepository extends Repository
 {
-    protected static $model = 'User';
+    /**
+     * Constructor.
+     *
+     * @param User $model User model.
+     */
+    public function __construct(User $model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * Find user by email.
@@ -16,7 +24,8 @@ class UserRepository extends Repository
      */
     public function findByEmail($email)
     {
-        return User::where('email', $email)
+        return $this->getModel()
+            ->where('email', $email)
             ->take(1)
             ->firstOrFail();
     }
