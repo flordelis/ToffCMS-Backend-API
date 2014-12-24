@@ -6,6 +6,7 @@
 abstract class Setting extends Eloquent
 {
     protected $table = 'settings';
+    protected $fillable = array('name', 'description', 'key', 'default', 'value', 'available_values', 'is_public');
 
     /**
      * Get ID attr.

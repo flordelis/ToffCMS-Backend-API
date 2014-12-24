@@ -7,6 +7,7 @@ class GalleryItem extends EloquentExtension
 {
     protected $table = 'gallery_items';
     protected $hidden = array('created_at', 'updated_at', 'gallery_id');
+    protected $fillable = array('type', 'content', 'gallery_id', 'order_id');
     public static $rules = array(
         'file' => array(
             'file' => array('required', 'mimes:jpeg,png,jpg,gif', 'image', 'max:2048'),

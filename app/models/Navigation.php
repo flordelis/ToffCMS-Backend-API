@@ -7,6 +7,7 @@ class Navigation extends EloquentExtension
 {
     protected $table = 'navigation';
     protected $hidden = array('order_id', 'created_at', 'updated_at', 'page', 'parent_id');
+    protected $fillable = array('title', 'type', 'uri', 'url', 'page_id', 'order_id', 'language', 'target', 'parent_id');
     protected $appends = array('full_url');
     public static $rules = array(
         'default' => array(

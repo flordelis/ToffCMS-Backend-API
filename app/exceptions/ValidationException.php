@@ -38,6 +38,12 @@ class ValidationException extends Exception
      */
     public function allMessages()
     {
-        return $this->get()->messages()->all();
+        $messages = $this->get()->messages();
+
+        if (is_object($messages)) {
+            return $messages->all();
+        }
+
+        return $messages;
     }
 }

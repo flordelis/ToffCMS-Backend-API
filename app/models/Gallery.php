@@ -7,6 +7,7 @@ class Gallery extends EloquentExtension
 {
     protected $table = 'gallery';
     protected $hidden = array('updated_at', 'status');
+    protected $fillable = array('title', 'slug', 'status');
     public static $rules = array(
         'default' => array(
             'title'        => array('required', 'max:100'),
