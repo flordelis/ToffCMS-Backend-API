@@ -121,6 +121,7 @@ return array(
         'Illuminate\Workbench\WorkbenchServiceProvider',
         'Orchestra\Imagine\ImagineServiceProvider',
         'LeroyMerlin\LaraSniffer\ServiceProvider',
+        'Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider',
 
     ),
 

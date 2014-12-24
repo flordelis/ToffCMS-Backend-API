@@ -54,7 +54,7 @@ App::error(
         return Response::json(
             array(
             'error' => true,
-            'data' => $exception->getMessage(),
+            'data' => array($exception->getMessage()),
             'count' => 0,
             ),
             404
@@ -68,7 +68,7 @@ App::error(
         return Response::json(
             array(
             'error' => true,
-            'data' => 'Wrong email and/or password',
+            'data' => array('Wrong email and/or password'),
             'count' => 0,
             ),
             Status::HTTP_UNAUTHORIZED
@@ -82,7 +82,7 @@ App::error(
         return Response::json(
             array(
             'error' => true,
-            'data' => $exception->getMessage(),
+            'data' => $exception->allMessages(),
             'count' => 0,
             ),
             Status::HTTP_NOT_ACCEPTABLE

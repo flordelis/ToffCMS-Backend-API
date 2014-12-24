@@ -6,12 +6,13 @@
 	"require": {
 		"laravel/framework": "~4.2",
 		"orchestra/imagine": "2.2.*",
+		"felixkiss/uniquewith-validator": "1.1.*"
+	},
+	"require-dev": {
+		"leroy-merlin-br/larasniffer": "dev-master",
+		"satooshi/php-coveralls": "dev-master",
 		"mockery/mockery": "0.9.*"
 	},
-    "require-dev": {
-        "leroy-merlin-br/larasniffer": "dev-master",
-        "satooshi/php-coveralls": "dev-master"
-    },
 	"autoload": {
 		"classmap": [
 			"app/commands",

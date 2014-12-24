@@ -7,10 +7,11 @@ class Page extends EloquentExtension
 {
     protected $table = 'pages';
     protected $hidden = array('updated_at', 'author_id');
+    protected $fillable = array('title', 'slug', 'status', 'language', 'body');
     public static $rules = array(
         'default' => array(
             'title'        => array('required', 'max:100'),
-            'slug'         => array('required', 'max:100', 'unique:pages,slug,null,id,language,en'),
+            'slug'         => array('required', 'max:100'),
             'status'       => array('in:draft,live'),
             'language'     => array('in:lv,en,ru'),
             'body'         => array('required')
@@ -21,7 +22,7 @@ class Page extends EloquentExtension
     );
 
     /**
-     * Grabt the rules.
+     * Grab the rules.
      *
      * @param string $key Key of the rules.
      *
@@ -32,7 +33,7 @@ class Page extends EloquentExtension
         $rules = parent::getRules($key);
 
         // Append an extra (dynamic) rule
-        $rules['slug'][] = 'unique:pages,slug,null,id,language,'. Input::get('language');
+        $rules['slug'][] = 'unique_with:pages,language,' . Input::get('language') . '=language';
 
         return $rules;
     }
