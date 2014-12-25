@@ -8,6 +8,18 @@ abstract class Repository
     protected $model;
 
     /**
+     * Find the model.
+     *
+     * @param integer $id Primary key of the row to be found.
+     *
+     * @return Objcet
+     */
+    public function find($id)
+    {
+        return $this->getModel()->find($id);
+    }
+
+    /**
      * Find or fail the model.
      *
      * @param integer $id Primary key of the row to be found.
