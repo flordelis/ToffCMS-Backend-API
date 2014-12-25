@@ -10,7 +10,6 @@ class Page extends EloquentExtension
     protected $fillable = array('title', 'slug', 'status', 'language', 'body');
     public static $rules = array(
         'default' => array(
-            'id'           => array('unique:pages,id'),
             'title'        => array('required', 'max:100'),
             'slug'         => array('required', 'max:100'),
             'status'       => array('in:draft,live'),
@@ -35,7 +34,7 @@ class Page extends EloquentExtension
 
         // Append an extra (dynamic) rule
         if ($key === 'update') {
-            $rules['slug'][] = 'unique_with:pages,language,' . Input::get('id') . '=language';
+            $rules['slug'][] = 'unique_with:pages,language,' . Input::get('language') . '=language';
         } else {
             $rules['slug'][] = 'unique_with:pages,language';
         }

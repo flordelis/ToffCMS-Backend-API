@@ -33,10 +33,7 @@ class PageRepositoryTest extends TestCase
         $this->pageRepository->create($array);
     }
 
-    /**
-     * @expectedException ValidationException
-     */
-    public function testUpdateWithDuplicateSlug()
+    public function testUpdateWithSameSlug()
     {
         $array = $this->firstPage->toArray();
 

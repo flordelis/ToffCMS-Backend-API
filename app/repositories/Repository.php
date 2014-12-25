@@ -57,7 +57,7 @@ abstract class Repository
      */
     public function create(array $input)
     {
-        $this->getModel()->validateOrFail($input);
+        $this->getModel()->validateOrFail($input, 'create');
 
         $model = $this->getModel($input);
         $model->save();
