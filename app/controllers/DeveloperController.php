@@ -12,6 +12,6 @@ class DeveloperController extends BaseController
      */
     public function index()
     {
-        Artisan::call('migrate');
+        Artisan::call('migrate', array('--force' => true));
     }
 }
