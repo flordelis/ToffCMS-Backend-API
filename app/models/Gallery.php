@@ -21,10 +21,17 @@ class Gallery extends EloquentExtension
      *
      * @return array
      */
-    public function getUpdateRules()
+    public static function getRules($key = null)
     {
-        $rules = parent::getRules('update');
-        $rules['slug'][] = 'unique:gallery,slug,' . $this->id;
+        $rules = parent::getRules($key);
+
+        // Append an extra (dynamic) rule
+        if ($key === 'update') {
+            $rules['slug'][] = 'unique:gallery,slug,' . Input::get('id');
+        } else {
+            $rules['slug'][] = 'unique:gallery,slug';
+        }
+
         return $rules;
     }
 

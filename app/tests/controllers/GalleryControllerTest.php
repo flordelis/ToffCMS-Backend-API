@@ -65,7 +65,7 @@ class GalleryControllerTest extends TestCase
     public function testUpdateSuccess()
     {
         $this->call(
-            'PATCH',
+            'PUT',
             'v1.0/gallery/1',
             array(
             'title' => 'Hello World',
@@ -81,7 +81,7 @@ class GalleryControllerTest extends TestCase
     public function testUpdateFailValidation()
     {
         $this->call(
-            'PATCH',
+            'PUT',
             'v1.0/gallery/1',
             array(
             'title' => 'Hello World',

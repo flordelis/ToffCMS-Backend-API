@@ -44,7 +44,7 @@ abstract class Repository
         $model = $this->findOrFail($id);
         $this->getModel()->validateOrFail($input, 'update');
 
-        $model->save($input);
+        $model->update($input);
         return $model;
     }
 

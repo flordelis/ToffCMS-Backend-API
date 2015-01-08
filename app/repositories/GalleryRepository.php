@@ -49,26 +49,4 @@ class GalleryRepository extends Repository
             ->take(1)
             ->firstOrFail();
     }
-
-    /**
-     * Update a gallery.
-     *
-     * @param integer $id    Primary key of the row to be updated.
-     * @param array   $input Posted input.
-     *
-     * @throws ValidationException If validation has failed.
-     * @return Page
-     */
-    public function update($id, array $input)
-    {
-        $gallery = $this->getModel()->findOrFail($id);
-
-        $validator = Validator::make($input, $gallery->getUpdateRules());
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
-
-        $gallery->save($input);
-        return $gallery;
-    }
 }
