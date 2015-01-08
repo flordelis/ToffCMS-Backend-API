@@ -23,6 +23,17 @@ class GalleryItemController extends BaseController
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $item = $this->item->create(Input::all());
+        return static::response($item->toArray());
+    }
+
+    /**
      * Upload an image.
      *
      * @return Response
