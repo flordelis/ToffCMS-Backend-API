@@ -9,7 +9,7 @@ class GalleryItem extends EloquentExtension
     protected $hidden = array('created_at', 'updated_at', 'gallery_id');
     protected $fillable = array('type', 'content', 'gallery_id', 'order_id');
     public static $rules = array(
-        'default' => array(
+        'create' => array(
             'gallery_id' => array('required'),
             'type' => array('required', 'in:video,image'),
             'content' => array('required')
