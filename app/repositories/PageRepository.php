@@ -46,7 +46,7 @@ class PageRepository extends Repository
             ->where('status', 'live')
             ->where('language', $language)
             ->with('author')
-            ->first();
+            ->firstOrFail();
     }
 
     /**
