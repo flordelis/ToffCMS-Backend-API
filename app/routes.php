@@ -44,6 +44,7 @@ Route::group(
 
         Route::get('gallery', 'GalleryController@index');
         Route::post('login', 'LoginController@getApiKey');
+        Route::post('user', 'UserController@store');
 
     }
 );

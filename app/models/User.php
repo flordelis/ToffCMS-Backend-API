@@ -6,7 +6,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 /**
  * User model.
  */
-class User extends Eloquent implements UserInterface
+class User extends EloquentExtension implements UserInterface
 {
     use Illuminate\Auth\UserTrait;
 
@@ -26,6 +26,14 @@ class User extends Eloquent implements UserInterface
      */
     protected $hidden = array('password', 'updated_at');
 
+    protected $fillable = array('email', 'password', 'confirmation_code');
+    public static $rules = array(
+        'default' => array(
+            'email' => array('required', 'email', 'unique:users'),
+            'password'=> array('required', 'alpha_num', 'between:6,12'),
+        ),
+    );
+
     /**
      * Grab the ID attribute.
      *
@@ -36,6 +44,16 @@ class User extends Eloquent implements UserInterface
     public function getIdAttribute($value)
     {
         return (int) $value;
+    }
+
+    /**
+     * Set the password attribute.
+     *
+     * @param string $password Password string.
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
     }
 
     /**

@@ -9,7 +9,7 @@ class UserTableSeeder extends Seeder
         User::create(
             array(
             'email' => 'mja@mja.lv',
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'api_key' => sha1('key#1')
             )
         );
@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
         User::create(
             array(
             'email' => 'seconduser@example.org',
-            'password' => Hash::make('second_password'),
+            'password' => 'second_password',
             'api_key' => sha1('key#2')
             )
         );
